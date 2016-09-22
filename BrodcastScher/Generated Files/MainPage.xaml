@@ -1,0 +1,41 @@
+﻿<Page x:ConnectionId='1'
+    x:Class="BrodcastScher.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BrodcastScher"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"                         >
+    <SplitView x:ConnectionId='2' x:Name="MySplitView" DisplayMode="CompactOverlay"  IsPaneOpen="False" 
+              CompactPaneLength="50" OpenPaneLength="150">
+        <SplitView.Pane>
+            <StackPanel Background="RoyalBlue">
+                <Button x:ConnectionId='3' x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" 
+                    Width="50" Height="50" Background="Transparent"/>
+
+                <StackPanel Orientation="Horizontal">
+                    <Button x:ConnectionId='6' x:Name="MenuButton_CurrentJob" FontFamily="Segoe MDL2 Assets" Content="&#xE8FC;"                     
+                    Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Button 1" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:ConnectionId='5' x:Name="MenuButton_Schedule" FontFamily="Segoe MDL2 Assets" Content="&#xE787;"                     
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Button 2" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:ConnectionId='4' x:Name="MenuButton_PlayList" FontFamily="Segoe MDL2 Assets" Content="&#xE90B;"                     
+                        Width="50" Height="50" Background="Transparent"/>
+                    <TextBlock Text="Button 3" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+        </SplitView.Pane>
+        <SplitView.Content>
+            <Grid x:ConnectionId='7' x:Name="Content" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <!-- Content Tab  -->
+            </Grid>
+        </SplitView.Content>
+    </SplitView>
+  
+</Page>
+

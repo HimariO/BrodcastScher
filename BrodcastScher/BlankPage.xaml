@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="BrodcastScher.BlankPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BrodcastScher"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data ="using:BrodcastScher"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <ListView x:Name="theList" Margin="0,0,943,0" BorderThickness="0,0,1,0" Width="972">
+            <ListView.ItemTemplate>
+                <DataTemplate  x:DataType="data:DayEvent">
+                    <Grid Height="{x:Bind itemH }" Margin="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <!--<Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="10" Height="10">
+                            <Image Source="Assets/arrow.png" Stretch="UniformToFill" PointerPressed="Image_PointerPressed"/>
+                        </Border>-->
+                        <TextBlock Grid.Column="1" Text="{x:Bind In}" TextWrapping="NoWrap"/>
+                        <Grid x:Name="detailGrid">
+                            <!--Omitted, Show detail information-->
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Click="Button_Click" Margin="1872,1048,0,0">
+            <TextBlock Text="Add"></TextBlock>
+        </Button>
+    </Grid>
+</Page>
