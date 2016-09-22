@@ -26,7 +26,9 @@ namespace BrodcastScher
 	private:
 		Platform::Collections::Vector<Platform::String^> DeviceNames;
 		std::vector<DayEventDetail> EventList;
-		//DayEventDetail* EventSelected;
+		DayEventDetail* EventSelected;
+		std::string DateString;
+		std::string WeekDayString;
 
 		void Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void DevicesList_ItemClick(Platform::Object^ sender, Windows::UI::Xaml::Controls::ItemClickEventArgs^ e);
@@ -39,5 +41,10 @@ namespace BrodcastScher
 	protected:
 		void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
 		void UpdateUIEventList();
+		void UpdateDetailView();
+	private:
+		void theList_ItemClick(Platform::Object^ sender, Windows::UI::Xaml::Controls::ItemClickEventArgs^ e);
+		void check_EveryDay_Checked(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void btn_AddEvent_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	};
 }

@@ -13,8 +13,10 @@ namespace Windows {
         namespace Xaml {
             namespace Controls {
                 ref class ListView;
+                ref class CheckBox;
                 ref class TimePicker;
                 ref class TextBox;
+                ref class Button;
             }
         }
     }
@@ -34,16 +36,20 @@ namespace BrodcastScher
     
     private:
         bool _contentLoaded;
-        class DayEventView_obj9_Bindings;
+        class DayEventView_obj13_Bindings;
     
         ::XamlBindingInfo::XamlBindings^ Bindings;
         private: ::Windows::UI::Xaml::Controls::ListView^ OutputDevicesList;
         private: ::Windows::UI::Xaml::Controls::ListView^ InputDevicesList;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ check_EveryDay;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ check_EveryWeek;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ check_EveryMonth;
         private: ::Windows::UI::Xaml::Controls::TimePicker^ endTimePicker;
         private: ::Windows::UI::Xaml::Controls::TextBox^ endTimeSec;
         private: ::Windows::UI::Xaml::Controls::TimePicker^ startTimePicker;
         private: ::Windows::UI::Xaml::Controls::TextBox^ startTimeSec;
         private: ::Windows::UI::Xaml::Controls::ListView^ theList;
+        private: ::Windows::UI::Xaml::Controls::Button^ btn_AddEvent;
     };
 }
 

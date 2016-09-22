@@ -90,13 +90,22 @@ MainPage::MainPage()
 		}
 		catch (Platform::COMException^ e) {
 			// File not found!
-			json_file = json::parse("{\"periodic\": { \"day\": {},\"week\": {},\"month\" : {}}, \"events\": {}}");
+			json_file = json::parse("{\"periodic\": { \"day\": [],\"week\": {}}, \"events\": {}}");
 
 			WriteToFile(json_file.dump());
 		}
 	});
 	
 
+}
+
+void BrodcastScher::MainPage::OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs ^ e)
+{
+	auto page_name = e->SourcePageType.Name;
+	
+	if (e->NavigationMode == NavigationMode::Back) {
+		//WriteToFile(json_file.dump());
+	}
 }
 
 

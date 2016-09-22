@@ -46,16 +46,6 @@ void ::BrodcastScher::PlayerTab::Connect(int __connectionId, ::Platform::Object^
                 this->btn_stop = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
             }
             break;
-        case 4:
-            {
-                this->input_listbox = safe_cast<::Windows::UI::Xaml::Controls::ListBox^>(__target);
-            }
-            break;
-        case 5:
-            {
-                this->output_listbox = safe_cast<::Windows::UI::Xaml::Controls::ListBox^>(__target);
-            }
-            break;
     }
     _contentLoaded = true;
 }

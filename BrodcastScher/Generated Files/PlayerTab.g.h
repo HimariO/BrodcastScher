@@ -12,7 +12,6 @@ namespace Windows {
         namespace Xaml {
             namespace Controls {
                 ref class Button;
-                ref class ListBox;
             }
         }
     }
@@ -36,8 +35,6 @@ namespace BrodcastScher
         private: ::Windows::UI::Xaml::Controls::Button^ btn_deviceSet;
         private: ::Windows::UI::Xaml::Controls::Button^ btn_start;
         private: ::Windows::UI::Xaml::Controls::Button^ btn_stop;
-        private: ::Windows::UI::Xaml::Controls::ListBox^ input_listbox;
-        private: ::Windows::UI::Xaml::Controls::ListBox^ output_listbox;
     };
 }
 

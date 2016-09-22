@@ -43,6 +43,7 @@ namespace BrodcastScher
 		};
 	};
 
+
 	class DayEventDetail {
 	private:
 		static  unsigned int counter_color;
@@ -53,7 +54,7 @@ namespace BrodcastScher
 		json toJSON();
 
 		DayEvent^ UIobject;
-		//DayEventDetail* Next ;
+		DayEventDetail* Next ;
 		//DayEventDetail* Beside;
 
 		std::string event_name;
@@ -61,6 +62,8 @@ namespace BrodcastScher
 
 		LPSYSTEMTIME start;
 		LPSYSTEMTIME end;
+
+		int repeat_type = 0;
 
 		InputType type;
 		unsigned int input_dev_index = 0;

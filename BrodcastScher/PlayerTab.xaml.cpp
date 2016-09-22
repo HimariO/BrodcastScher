@@ -28,7 +28,7 @@ PlayerTab::PlayerTab()
 {
 	InitializeComponent();
 
-	concurrency::create_task(DeviceInformation::FindAllAsync(MediaDevice::GetAudioCaptureSelector())).then(
+	/*concurrency::create_task(DeviceInformation::FindAllAsync(MediaDevice::GetAudioCaptureSelector())).then(
 		[this ](DeviceInformationCollection^ devices) {
 
 		for (auto d : devices) {
@@ -43,7 +43,7 @@ PlayerTab::PlayerTab()
 		for (auto d : devices) {
 			output_listbox->Items->Append(d->Name);
 		}
-	});
+	});*/
 	
 
 	using namespace Windows::System::Threading;
@@ -90,5 +90,5 @@ void BrodcastScher::PlayerTab::InitAudioGraphSetting()
 
 void BrodcastScher::PlayerTab::btn_deviceSet_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	rely = new AudioRely(input_listbox->SelectedIndex, output_listbox->SelectedIndex);
+	//rely = new AudioRely(input_listbox->SelectedIndex, output_listbox->SelectedIndex);
 }

@@ -14,9 +14,10 @@ DayEvent::DayEvent(Platform::String^ A, Platform::String^ B, double h, Platform:
 	this->Color = color;
 }
 
-//JsonPtrWrapper::JsonPtrWrapper() {};
+//************************************************************************************************************************
 
 unsigned int BrodcastScher::DayEventDetail::counter_color = 0;
+
 std::string BrodcastScher::DayEventDetail::color_opts[6]{
 	"#99FFFF",
 	"#99FFCC",
@@ -26,12 +27,23 @@ std::string BrodcastScher::DayEventDetail::color_opts[6]{
 	"#FFFF99",
 };
 
+
 BrodcastScher::DayEventDetail::DayEventDetail()
 {
+	event_name = "";
+	description = "";
+	type = InputType::InputDevice;
+	start = new _SYSTEMTIME();
+	end = new _SYSTEMTIME();
+	GetSystemTime(start);
+	GetSystemTime(end);
 }
+
 
 BrodcastScher::DayEventDetail::DayEventDetail(json JSON)
 {
+	start = new _SYSTEMTIME();
+	end = new _SYSTEMTIME();
 	start->wHour = JSON["start_h"];
 	start->wMinute = JSON["start_m"];
 	start->wSecond = JSON["start_s"];
@@ -59,6 +71,7 @@ BrodcastScher::DayEventDetail::DayEventDetail(json JSON)
 
 	event_name = JSON["name"].get<std::string>();
 	description = JSON["description"].get<std::string>();
+	repeat_type = JSON["repeat_type "];
 
 	int height = (end->wHour * 60 + end->wMinute) - (start->wHour * 60 + start->wMinute);
 	
@@ -95,6 +108,7 @@ json BrodcastScher::DayEventDetail::toJSON()
 		{ "output_device_index", output_dev_index },
 		{ "input_file", "mp3/wav file path" } ,
 		{ "input_playlist", "m3u file path" } ,
+		{"repeat_type", repeat_type },
 	};
 
 	return empty_jsob;
