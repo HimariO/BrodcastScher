@@ -365,17 +365,20 @@ void BrodcastScher::DayEventView::check_EveryDay_Checked(Platform::Object^ sende
 	if (Name == "check_EveryDay") {
 		check_EveryWeek->IsChecked = false;
 		check_EveryMonth->IsChecked = false;
-		EventSelected->repeat_type = 1;
+		if(EventSelected != nullptr)
+			EventSelected->repeat_type = 1;
 	}
 	else if (Name == "check_EveryWeek") {
 		check_EveryDay->IsChecked = false;
 		check_EveryMonth->IsChecked = false;
-		EventSelected->repeat_type = 2;
+		if (EventSelected != nullptr)
+			EventSelected->repeat_type = 2;
 	}
 	else {
 		check_EveryWeek->IsChecked = false;
 		check_EveryDay->IsChecked = false;
-		EventSelected->repeat_type = 3;
+		if (EventSelected != nullptr)
+			EventSelected->repeat_type = 3;
 	}
 
 }

@@ -46,6 +46,106 @@ void ::BrodcastScher::PlayerTab::Connect(int __connectionId, ::Platform::Object^
                 this->btn_stop = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
             }
             break;
+        case 4:
+            {
+                this->equalizerEffectContainer = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
+            }
+            break;
+        case 5:
+            {
+                this->eqToggle = safe_cast<::Windows::UI::Xaml::Controls::ToggleSwitch^>(__target);
+            }
+            break;
+        case 6:
+            {
+                this->eq1SliderContainer = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
+            }
+            break;
+        case 7:
+            {
+                this->eq2SliderContainer = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
+            }
+            break;
+        case 8:
+            {
+                this->eq3SliderContainer = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
+            }
+            break;
+        case 9:
+            {
+                this->eq4SliderContainer = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
+            }
+            break;
+        case 10:
+            {
+                this->eq5SliderContainer = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
+            }
+            break;
+        case 11:
+            {
+                this->eq6SliderContainer = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
+            }
+            break;
+        case 12:
+            {
+                this->eq6Slider = safe_cast<::Windows::UI::Xaml::Controls::Slider^>(__target);
+            }
+            break;
+        case 13:
+            {
+                this->eq6SliderLabel = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 14:
+            {
+                this->eq5Slider = safe_cast<::Windows::UI::Xaml::Controls::Slider^>(__target);
+            }
+            break;
+        case 15:
+            {
+                this->eq5SliderLabel = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 16:
+            {
+                this->eq4Slider = safe_cast<::Windows::UI::Xaml::Controls::Slider^>(__target);
+            }
+            break;
+        case 17:
+            {
+                this->eq4SliderLabel = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 18:
+            {
+                this->eq3Slider = safe_cast<::Windows::UI::Xaml::Controls::Slider^>(__target);
+            }
+            break;
+        case 19:
+            {
+                this->eq3SliderLabel = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 20:
+            {
+                this->eq2Slider = safe_cast<::Windows::UI::Xaml::Controls::Slider^>(__target);
+            }
+            break;
+        case 21:
+            {
+                this->eq2SliderLabel = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 22:
+            {
+                this->eq1Slider = safe_cast<::Windows::UI::Xaml::Controls::Slider^>(__target);
+            }
+            break;
+        case 23:
+            {
+                this->eq1SliderLabel = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
     }
     _contentLoaded = true;
 }

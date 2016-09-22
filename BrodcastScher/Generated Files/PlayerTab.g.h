@@ -12,6 +12,10 @@ namespace Windows {
         namespace Xaml {
             namespace Controls {
                 ref class Button;
+                ref class StackPanel;
+                ref class ToggleSwitch;
+                ref class Slider;
+                ref class TextBlock;
             }
         }
     }
@@ -35,6 +39,26 @@ namespace BrodcastScher
         private: ::Windows::UI::Xaml::Controls::Button^ btn_deviceSet;
         private: ::Windows::UI::Xaml::Controls::Button^ btn_start;
         private: ::Windows::UI::Xaml::Controls::Button^ btn_stop;
+        private: ::Windows::UI::Xaml::Controls::StackPanel^ equalizerEffectContainer;
+        private: ::Windows::UI::Xaml::Controls::ToggleSwitch^ eqToggle;
+        private: ::Windows::UI::Xaml::Controls::StackPanel^ eq1SliderContainer;
+        private: ::Windows::UI::Xaml::Controls::StackPanel^ eq2SliderContainer;
+        private: ::Windows::UI::Xaml::Controls::StackPanel^ eq3SliderContainer;
+        private: ::Windows::UI::Xaml::Controls::StackPanel^ eq4SliderContainer;
+        private: ::Windows::UI::Xaml::Controls::StackPanel^ eq5SliderContainer;
+        private: ::Windows::UI::Xaml::Controls::StackPanel^ eq6SliderContainer;
+        private: ::Windows::UI::Xaml::Controls::Slider^ eq6Slider;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ eq6SliderLabel;
+        private: ::Windows::UI::Xaml::Controls::Slider^ eq5Slider;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ eq5SliderLabel;
+        private: ::Windows::UI::Xaml::Controls::Slider^ eq4Slider;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ eq4SliderLabel;
+        private: ::Windows::UI::Xaml::Controls::Slider^ eq3Slider;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ eq3SliderLabel;
+        private: ::Windows::UI::Xaml::Controls::Slider^ eq2Slider;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ eq2SliderLabel;
+        private: ::Windows::UI::Xaml::Controls::Slider^ eq1Slider;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ eq1SliderLabel;
     };
 }
 
