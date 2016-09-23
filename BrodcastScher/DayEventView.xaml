@@ -7,7 +7,21 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:data ="using:BrodcastScher"
     mc:Ignorable="d">
-
+    <Page.Resources>
+        <MenuFlyout x:Key="mContextMenu">
+            <MenuFlyoutItem Text="Copy" Tag="&#xE1A5;"  Click="MenuFlyoutItem_Click"/>
+            <MenuFlyoutItem Text="Pase" Tag="&#xE2F6;" Click="MenuFlyoutItem_Click"/>
+            <MenuFlyoutItem Text="Delete" Tag="&#xE10A;" Click="MenuFlyoutItem_Click"/>
+            <!--<MenuFlyoutSubItem Text="Other">
+                <MenuFlyoutItem Text="Sort by" />
+                <MenuFlyoutItem Text="Name" />
+                <MenuFlyoutItem Text="Date" />
+                <MenuFlyoutItem Text="Size" />
+            </MenuFlyoutSubItem>-->
+        </MenuFlyout>
+    </Page.Resources>
+    
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         
         <Grid.ColumnDefinitions>
@@ -31,7 +45,7 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate  x:DataType="data:DayEvent">
-                        <Grid Height="{x:Bind itemH }" Padding="6" Background="{x:Bind Color}">
+                        <Grid Height="{x:Bind itemH }" Padding="6" Background="{x:Bind Color}" RightTapped="Grid_RightTapped">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>

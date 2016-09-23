@@ -8,6 +8,7 @@
 #include "ScheduleTab.xaml.h"
 #include "DayEventView.xaml.h"
 #include "CodeToolBox.h"
+//#include "UIdataContainer.h"
 
 using namespace BrodcastScher;
 
@@ -31,6 +32,7 @@ using namespace Windows::Globalization;
 
 DateTimeFormatter ^time_formater;
 Calendar^ calendar;
+DayEventDetail copyedDetail;
 
 struct ColorEqual : public std::binary_function<const Color, const Color, bool>
 {

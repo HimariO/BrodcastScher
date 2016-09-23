@@ -6,15 +6,16 @@
 #pragma once
 
 #include "DayEventView.g.h"
-#include "UIdataContainer.h"
+//#include "UIdataContainer.h"
 #include <vector>
 
 using json = nlohmann::json;
-
 extern json json_file;
+extern BrodcastScher::DayEventDetail copyedDetail;
 
 namespace BrodcastScher
 {
+	
 	/// <summary>
 	/// 可以在本身使用或巡覽至框架內的空白頁面。
 	/// </summary>
@@ -27,6 +28,8 @@ namespace BrodcastScher
 		Platform::Collections::Vector<Platform::String^> DeviceNames;
 		std::vector<DayEventDetail> EventList;
 		DayEventDetail* EventSelected;
+		DayEventDetail eOnRightTap;
+
 		std::string DateString;
 		std::string WeekDayString;
 
@@ -46,5 +49,7 @@ namespace BrodcastScher
 		void theList_ItemClick(Platform::Object^ sender, Windows::UI::Xaml::Controls::ItemClickEventArgs^ e);
 		void check_EveryDay_Checked(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 		void btn_AddEvent_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void Grid_RightTapped(Platform::Object^ sender, Windows::UI::Xaml::Input::RightTappedRoutedEventArgs^ e);
+		void MenuFlyoutItem_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	};
 }

@@ -44,9 +44,15 @@ bool EventSort(DayEventDetail A, DayEventDetail B) {
 DayEventView::DayEventView()
 {
 	InitializeComponent();
-	theList->Items->Append(ref new DayEvent("Empty", "0:00 ~ 6:00", 360, "#FFF4F4F4"));
+	DayEventDetail temp;
+	temp.UIobject = ref new DayEvent("Empty", "0:00 ~ 6:00", 360, "#FFF4F4F4");
+
+	EventList.push_back(temp);
+	theList->Items->Append(temp.UIobject);
 	theList->Items->Append(ref new DayEvent("[Event] Test", "Test Event", 50, "#FF82FFF4"));
 	theList->Items->Append(ref new DayEvent("Empty", "6:50 ~ 24:00", 1440-410, "#FFF4F4F4"));
+
+	//UpdateUIEventList();
 	//theList->Items->Append(ref new DayEvent("A", "B", 150));
 	
 	//EnumerateAudioDevicesAsync();
@@ -270,7 +276,7 @@ void BrodcastScher::DayEventView::OnNavigatedTo(Windows::UI::Xaml::Navigation::N
 	catch (...) {}
 	
 
-	UpdateUIEventList();
+	//UpdateUIEventList();
 
 	//auto rootFrame = dynamic_cast<Windows::UI::Xaml::Controls::Frame^>(Window::Current->Content);
 
@@ -394,4 +400,39 @@ void BrodcastScher::DayEventView::btn_AddEvent_Click(Platform::Object^ sender, W
 	EventList.push_back(DayEventDetail());
 	EventSelected = &EventList[EventList.size() - 1];
 	UpdateDetailView();
+}
+
+
+// Grid Inside "theList" itemTemplate's righttapped event.
+void BrodcastScher::DayEventView::Grid_RightTapped(Platform::Object^ sender, Windows::UI::Xaml::Input::RightTappedRoutedEventArgs^ e)
+{
+	// Getting Original Binded Data from sender.
+	auto f_element = (FrameworkElement^)sender;
+	auto d_context = f_element->DataContext;
+	auto actual_data = (DayEvent^)d_context;
+
+	for (auto _event : EventList) 
+		if(_event.UIobject == actual_data)
+			eOnRightTap = _event;
+	
+	auto ContextMenu =(MenuFlyout^) this->Resources->Lookup("mContextMenu");
+	ContextMenu->ShowAt(nullptr, e->GetPosition(nullptr));
+}
+
+
+void BrodcastScher::DayEventView::MenuFlyoutItem_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	auto ui = (MenuFlyoutItem^)sender;
+	auto tex = ui->Text;
+
+	if (tex == "Copy") {
+		copyedDetail = eOnRightTap;
+	}
+	else if (tex == " Pase") {
+		EventList.push_back(copyedDetail);
+		UpdateUIEventList();
+	}
+	else if (tex == "Delete") {
+
+	}
 }
