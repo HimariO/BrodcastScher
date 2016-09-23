@@ -46,6 +46,7 @@ ScheduleTab::ScheduleTab()
 	InitializeComponent();
 	time_formater = ref new DateTimeFormatter("shortdate"); 
 	calendar = ref new  Windows::Globalization::Calendar();
+	
 }
 
 
@@ -75,19 +76,26 @@ void BrodcastScher::ScheduleTab::Calendar_CalendarViewDayItemChanging(Windows::U
 	int item_c = 0;
 
 	try {
-		auto day_items = json_file["event"][s_time];
-		if (day_items.size()>0) {
-			item_c += day_items.size();
+		if (json_file["event"].find(s_time) != json_file["event"].end()) {
+			auto day_items = json_file["event"][s_time];
+
+			if (day_items.size() > 0) {
+				item_c += day_items.size();
+			}
 		}
 	}catch(...){}
 
 	try {
-		auto day_items = json_file["periodic"][weekday];
-		if (day_items.size()>0) {
-			item_c += day_items.size();
+		if (json_file["periodic"].find(weekday) != json_file["periodic"].end()) {
+			auto day_items = json_file["periodic"][weekday];
+
+			if (day_items.size() > 0) {
+				item_c += day_items.size();
+			}
 		}
 	}
 	catch (...) {}
+
 
 	IVector<Color>^ colors = ref new Vector<Color, ColorEqual>();
 
@@ -108,6 +116,9 @@ void BrodcastScher::ScheduleTab::Calendar_CalendarViewDayItemChanging(Windows::U
 	}
 	
 	args->Item->SetDensityColors(colors);
+
+	if(d % 2 == 0) // Give event date some Color.
+		args->Item->Background = ref new SolidColorBrush(Windows::UI::Colors::LightBlue);
 }
 
 

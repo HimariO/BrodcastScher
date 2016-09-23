@@ -45,10 +45,8 @@ DayEventView::DayEventView()
 {
 	InitializeComponent();
 	theList->Items->Append(ref new DayEvent("Empty", "0:00 ~ 6:00", 360, "#FFF4F4F4"));
-	theList->Items->Append(ref new DayEvent("[Event] A", "Some description! \n Some description! Some description! Some description! Some description! Some description!", 50, "#FF82FFF4"));
-	theList->Items->Append(ref new DayEvent("[Event] B", "!@#!!", 100, "#FFFFD0C6"));
-	theList->Items->Append(ref new DayEvent("Empty", "0:00 ~ 6:00", 360, "#FFF4F4F4"));
-	theList->Items->Append(ref new DayEvent("Empty", "0:00 ~ 6:00", 360, "#FFF4F4F4"));
+	theList->Items->Append(ref new DayEvent("[Event] Test", "Test Event", 50, "#FF82FFF4"));
+	theList->Items->Append(ref new DayEvent("Empty", "6:50 ~ 24:00", 1440-410, "#FFF4F4F4"));
 	//theList->Items->Append(ref new DayEvent("A", "B", 150));
 	
 	//EnumerateAudioDevicesAsync();
@@ -92,6 +90,7 @@ void BrodcastScher::DayEventView::Button_Click(Platform::Object^ sender, Windows
 		}
 	}
 
+	auto debug = thisday_array.dump();
 	json_file["event"][DateString] = thisday_array;
 	json_file["periodic"]["day"] = dayly_array;
 	json_file["periodic"]["week"][WeekDayString] = weekly_array;
@@ -272,6 +271,7 @@ void BrodcastScher::DayEventView::OnNavigatedTo(Windows::UI::Xaml::Navigation::N
 	
 
 	UpdateUIEventList();
+
 	//auto rootFrame = dynamic_cast<Windows::UI::Xaml::Controls::Frame^>(Window::Current->Content);
 
 	//if (rootFrame->CanGoBack)
@@ -311,10 +311,10 @@ void BrodcastScher::DayEventView::UpdateDetailView()
 		return;
 
 	// update timepicker
-	int h = EventSelected->start->wHour * 3600;
-	int m = EventSelected->start->wMinute * 60;
+	int64 h = EventSelected->start->wHour * 3600;
+	int64 m = EventSelected->start->wMinute * 60;
+	
 	TimeSpan tp;
-
 	tp.Duration = (h + m) * 10000000;
 	startTimePicker->Time = tp;
 
@@ -337,6 +337,11 @@ void BrodcastScher::DayEventView::UpdateDetailView()
 	case 2:
 		check_EveryDay->IsChecked = false;
 		check_EveryWeek->IsChecked = true;
+		check_EveryMonth->IsChecked = false;
+		break;
+	default:
+		check_EveryDay->IsChecked = false;
+		check_EveryWeek->IsChecked = false;
 		check_EveryMonth->IsChecked = false;
 	}
 }

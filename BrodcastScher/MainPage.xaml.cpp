@@ -48,7 +48,12 @@ void WriteToFile(std::string data) {
 
 	concurrency::create_task(localFolder->CreateFileAsync("data.json", Windows::Storage::CreationCollisionOption::ReplaceExisting))
 		.then([data_S](StorageFile^ file) {
-		FileIO::WriteTextAsync(file, data_S);
+		try {
+			FileIO::WriteTextAsync(file, data_S);
+		}
+		catch (Platform::COMException^ e) {
+			auto mes = e->Message;
+		}
 	});
 }
 
@@ -82,20 +87,18 @@ MainPage::MainPage()
 			String^ data = task.get(); // getting task result.
 			std::string data_s = Tool::STos(data);
 			json_file = json::parse(data_s);
-
+			
 		}
 		catch (std::domain_error e) {
 			// Parse Error!
 			// display Error Message somewhere.
 		}
-		catch (Platform::COMException^ e) {
+		catch (...) {
 			// File not found!
 			json_file = json::parse("{\"periodic\": { \"day\": [],\"week\": {}}, \"events\": {}}");
-
 			WriteToFile(json_file.dump());
 		}
 	});
-	
 
 }
 
@@ -104,7 +107,7 @@ void BrodcastScher::MainPage::OnNavigatedTo(Windows::UI::Xaml::Navigation::Navig
 	auto page_name = e->SourcePageType.Name;
 	
 	if (e->NavigationMode == NavigationMode::Back) {
-		//WriteToFile(json_file.dump());
+		WriteToFile(json_file.dump());
 	}
 }
 
