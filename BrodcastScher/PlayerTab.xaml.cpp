@@ -5,6 +5,8 @@
 
 #include "pch.h"
 #include "PlayerTab.xaml.h"
+#include "CodeToolBox.h"
+#include <algorithm>
 
 using namespace BrodcastScher;
 
@@ -23,6 +25,19 @@ using namespace Windows::Media::Audio;
 using namespace Windows::Media::Render;
 using namespace Windows::Devices::Enumeration;
 // 空白頁項目範本已記錄在 http://go.microsoft.com/fwlink/?LinkId=234238
+
+
+
+
+bool EventSort(DayEventDetail A, DayEventDetail B) {
+	int A_time = A.start->wHour * 60 + A.start->wMinute;
+	int B_time = B.start->wHour * 60 + B.start->wMinute;
+
+	return A_time < B_time;
+}
+
+
+
 
 PlayerTab::PlayerTab()
 {
@@ -46,40 +61,45 @@ PlayerTab::PlayerTab()
 	});*/
 	
 
-	using namespace Windows::System::Threading;
-	using namespace Windows::UI::Core;
-	TimeSpan delay;
-	delay.Duration = 3 * 60 * 10000000; // 10,000,000 ticks per second
-
-	ThreadPoolTimer ^ DelayTimer = ThreadPoolTimer::CreateTimer(
-		ref new TimerElapsedHandler([this](ThreadPoolTimer^ source)
-	{
-		// 
-		// TODO: Work
-		// 
-
-		// 
-		// Update the UI thread by using the UI core dispatcher.
-		// 
-		Dispatcher->RunAsync(CoreDispatcherPriority::High,
-			ref new DispatchedHandler([this]()
-		{
-			// 
-			// UI components can be accessed within this scope.
-			// 
-
-			
-
-		}));
-
-	}), delay);
+	
 }
 
 
 void BrodcastScher::PlayerTab::btn_start_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-	
-	rely->StartStreaming();
+	using namespace Windows::Globalization;
+	Calendar ^_calendar = ref new Calendar();
+
+	_calendar->SetToNow();
+	auto s_time = Tool::GetDateString(_calendar->Year, _calendar->Month, _calendar->Day);
+	auto weekday = Tool::STos(_calendar->DayOfWeek.ToString());
+
+	try {
+		if (json_file["events"].find(s_time) != json_file["events"].end()) {
+			auto day_items = json_file["events"][s_time];
+
+			if (day_items.size() > 0) {
+				for (auto event_ : day_items)
+					event_queue.push_back(DayEventDetail(event_));
+			}
+		}
+	}
+	catch (...) {}
+
+	try {
+		if (json_file["periodic"]["week"].find(weekday) != json_file["periodic"]["week"].end()) {
+			auto day_items = json_file["periodic"]["week"][weekday];
+
+			if (day_items.size() > 0) {
+				for (auto event_ : day_items)
+					event_queue.push_back(DayEventDetail(event_));
+			}
+		}
+	}
+	catch (...) {}
+
+	std::sort(event_queue.begin(), event_queue.end(), EventSort);
+	//rely->StartStreaming();
 }
 
 void BrodcastScher::PlayerTab::InitAudioGraphSetting()

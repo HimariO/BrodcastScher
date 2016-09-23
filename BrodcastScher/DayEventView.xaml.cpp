@@ -32,30 +32,17 @@ Calendar ^ _calendar;
 json this_day_events;
 
 
-bool EventSort(DayEventDetail A, DayEventDetail B) {
-	int A_time = A.start->wHour * 60 + A.start->wMinute;
-	int B_time = B.start->wHour * 60 + B.start->wMinute;
-
-	return A_time < B_time;
-}
-
-
-
 DayEventView::DayEventView()
 {
 	InitializeComponent();
-	DayEventDetail temp;
-	temp.UIobject = ref new DayEvent("Empty", "0:00 ~ 6:00", 360, "#FFF4F4F4");
+	//DayEventDetail temp;
+	//temp.UIobject = ref new DayEvent("Empty", "0:00 ~ 6:00", 360, "#FFF4F4F4");
 
-	EventList.push_back(temp);
-	theList->Items->Append(temp.UIobject);
-	theList->Items->Append(ref new DayEvent("[Event] Test", "Test Event", 50, "#FF82FFF4"));
-	theList->Items->Append(ref new DayEvent("Empty", "6:50 ~ 24:00", 1440-410, "#FFF4F4F4"));
+	//EventList.push_back(temp);
+	//theList->Items->Append(temp.UIobject);
+	//theList->Items->Append(ref new DayEvent("[Event] Test", "Test Event", 50, "#FF82FFF4"));
+	//theList->Items->Append(ref new DayEvent("Empty", "6:50 ~ 24:00", 1440-410, "#FFF4F4F4"));
 
-	//UpdateUIEventList();
-	//theList->Items->Append(ref new DayEvent("A", "B", 150));
-	
-	//EnumerateAudioDevicesAsync();
 	_calendar = ref new Calendar();
 
 	concurrency::create_task(DeviceInformation::FindAllAsync(MediaDevice::GetAudioCaptureSelector())).then(
@@ -97,7 +84,7 @@ void BrodcastScher::DayEventView::Button_Click(Platform::Object^ sender, Windows
 	}
 
 	auto debug = thisday_array.dump();
-	json_file["event"][DateString] = thisday_array;
+	json_file["events"][DateString] = thisday_array;
 	json_file["periodic"]["day"] = dayly_array;
 	json_file["periodic"]["week"][WeekDayString] = weekly_array;
 	this->Frame->GoBack();
@@ -123,15 +110,10 @@ void BrodcastScher::DayEventView::startTimePicker_TimeChanged(Platform::Object^ 
 	int64 hours = selectedTimeInSeconds / 3600;
 	int64 minutes = (selectedTimeInSeconds % 3600) / 60;
 
-	EventSelected->start->wHour = hours;
-	EventSelected->start->wMinute = minutes;
-	
-	/*SYSTEMTIME now;
-	GetSystemTime(&now);
-
-	auto  y = now.wYear;
-	auto m = now.wMonth;
-	auto  d = now.wDay;*/
+	if (EventSelected != nullptr) {
+		EventSelected->start->wHour = hours;
+		EventSelected->start->wMinute = minutes;
+	}
 }
 
 
@@ -141,57 +123,17 @@ void BrodcastScher::DayEventView::endTimePicker_TimeChanged(Platform::Object^ se
 	int64 hours = selectedTimeInSeconds / 3600;
 	int64 minutes = (selectedTimeInSeconds % 3600) / 60;
 
-	EventSelected->end->wHour = hours;
-	EventSelected->end->wMinute = minutes;
+	if (EventSelected != nullptr) {
+		EventSelected->end->wHour = hours;
+		EventSelected->end->wMinute = minutes;
+	}
 }
 
 
 void BrodcastScher::DayEventView::EnumerateAudioDevicesAsync()
 {
 	
-	// Get the string identifier of the audio renderer
-	Platform::String^ AudioSelector = MediaDevice::GetAudioRenderSelector();
-
-	// Add custom properties to the query
-	auto PropertyList = ref new Vector<Platform::String^>();
-	PropertyList->Append(PKEY_AudioEndpoint_Supports_EventDriven_Mode);
-
-
-	// Setup the asynchronous callback
-	Concurrency::task<DeviceInformationCollection^> enumOperation(DeviceInformation::FindAllAsync(AudioSelector, PropertyList));
-	enumOperation.then([this](DeviceInformationCollection^ DeviceInfoCollection)
-	{
-		if (!(DeviceInfoCollection == nullptr) || !(DeviceInfoCollection->Size == 0))
-		{
-			try
-			{
-				// Enumerate through the devices and the custom properties
-				for (unsigned int i = 0; i < DeviceInfoCollection->Size; i++)
-				{
-					DeviceInformation^ deviceInfo = DeviceInfoCollection->GetAt(i);
-					Platform::String^ DeviceInfoString = deviceInfo->Name;
-
-					if (deviceInfo->Properties->Size > 0)
-					{
-						// Pull out the custom property
-						Object^ DevicePropString = deviceInfo->Properties->Lookup(PKEY_AudioEndpoint_Supports_EventDriven_Mode);
-
-						if (nullptr != DevicePropString)
-						{
-							DeviceInfoString = DeviceInfoString + " Device ID[" + deviceInfo->Id + "]";
-						}
-					}
-
-					this->DeviceNames.Append(DeviceInfoString);
-					OutputDevicesList->Items->Append(DeviceInfoString);
-				}
-			}
-			catch (Platform::Exception^ e)
-			{
-				OutputDevicesList->Items->Append("Encounter Unknow Error");
-			}
-		}
-	});
+	
 }
 
 
@@ -231,8 +173,8 @@ void BrodcastScher::DayEventView::OnNavigatedTo(Windows::UI::Xaml::Navigation::N
 	DateString = s_time;
 
 	try {
-		this_day_events = json_file["event"][s_time];
-		
+		this_day_events = json_file["events"][s_time];
+		auto s = this_day_events.dump();
 		if (this_day_events.size() > 0) {
 			for (auto data : this_day_events) {
 				EventList.push_back(DayEventDetail(data));
@@ -240,7 +182,7 @@ void BrodcastScher::DayEventView::OnNavigatedTo(Windows::UI::Xaml::Navigation::N
 		}
 	}
 	catch (std::domain_error e) {
-
+		auto debug = e.what();
 	}
 	catch (...) {}
 	
@@ -276,7 +218,7 @@ void BrodcastScher::DayEventView::OnNavigatedTo(Windows::UI::Xaml::Navigation::N
 	catch (...) {}
 	
 
-	//UpdateUIEventList();
+	UpdateUIEventList();
 
 	//auto rootFrame = dynamic_cast<Windows::UI::Xaml::Controls::Frame^>(Window::Current->Content);
 
@@ -291,7 +233,7 @@ void BrodcastScher::DayEventView::OnNavigatedTo(Windows::UI::Xaml::Navigation::N
 
 void BrodcastScher::DayEventView::UpdateUIEventList()
 {
-	std::sort(EventList.begin(), EventList.end(), EventSort);
+	std::sort(EventList.begin(), EventList.end(), Tool::EventSort);
 	theList->Items->Clear();
 
 	int pre_start_time = 0;
@@ -306,7 +248,12 @@ void BrodcastScher::DayEventView::UpdateUIEventList()
 			int EmptyH = current - pre_end_time;
 			theList->Items->Append(ref new DayEvent("Empty", "", EmptyH, "#FFF4F4F4"));
 		}
+		pre_end_time = data.end->wHour * 60 + data.end->wMinute;
 		theList->Items->Append(data.UIobject);
+	}
+
+	if (pre_end_time < 24 * 60) {
+		theList->Items->Append(ref new DayEvent("Empty", "", 24 * 60 - pre_end_time, "#FFF4F4F4"));
 	}
 }
 
@@ -315,7 +262,7 @@ void BrodcastScher::DayEventView::UpdateDetailView()
 {
 	if (EventSelected == nullptr)
 		return;
-
+	
 	// update timepicker
 	int64 h = EventSelected->start->wHour * 3600;
 	int64 m = EventSelected->start->wMinute * 60;

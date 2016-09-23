@@ -78,8 +78,8 @@ void BrodcastScher::ScheduleTab::Calendar_CalendarViewDayItemChanging(Windows::U
 	int item_c = 0;
 
 	try {
-		if (json_file["event"].find(s_time) != json_file["event"].end()) {
-			auto day_items = json_file["event"][s_time];
+		if (json_file["events"].find(s_time) != json_file["events"].end()) {
+			auto day_items = json_file["events"][s_time];
 
 			if (day_items.size() > 0) {
 				item_c += day_items.size();
@@ -88,8 +88,8 @@ void BrodcastScher::ScheduleTab::Calendar_CalendarViewDayItemChanging(Windows::U
 	}catch(...){}
 
 	try {
-		if (json_file["periodic"].find(weekday) != json_file["periodic"].end()) {
-			auto day_items = json_file["periodic"][weekday];
+		if (json_file["periodic"]["week"].find(weekday) != json_file["periodic"]["week"].end()) {
+			auto day_items = json_file["periodic"]["week"][weekday];
 
 			if (day_items.size() > 0) {
 				item_c += day_items.size();

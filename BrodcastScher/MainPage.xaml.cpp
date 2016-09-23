@@ -72,34 +72,34 @@ MainPage::MainPage()
 
 	using namespace Windows::Storage;
 
-	auto localFolder = ApplicationData::Current->LocalFolder;
+	if (json_file.empty()) {
+		auto localFolder = ApplicationData::Current->LocalFolder;
 
+		concurrency::create_task(localFolder->GetFileAsync("data.json")).then([this](StorageFile^ file) {
+			try {
+				return FileIO::ReadTextAsync(file);
+			}
+			catch (Platform::COMException^ e) {
+				// Something when wrong.
+			}
+		}).then([this](concurrency::task<String^> task) {
+			try {
+				String^ data = task.get(); // getting task result.
+				std::string data_s = Tool::STos(data);
+				json_file = json::parse(data_s);
 
-	concurrency::create_task(localFolder->GetFileAsync("data.json")).then([this](StorageFile^ file) {
-		try {
-			return FileIO::ReadTextAsync(file);
-		}
-		catch (Platform::COMException^ e) {
-			// Something when wrong.
-		}
-	}).then([this](concurrency::task<String^> task) {
-		try {
-			String^ data = task.get(); // getting task result.
-			std::string data_s = Tool::STos(data);
-			json_file = json::parse(data_s);
-			
-		}
-		catch (std::domain_error e) {
-			// Parse Error!
-			// display Error Message somewhere.
-		}
-		catch (...) {
-			// File not found!
-			json_file = json::parse("{\"periodic\": { \"day\": [],\"week\": {}}, \"events\": {}}");
-			WriteToFile(json_file.dump());
-		}
-	});
-
+			}
+			catch (std::domain_error e) {
+				// Parse Error!
+				// display Error Message somewhere.
+			}
+			catch (...) {
+				// File not found!
+				json_file = json::parse("{\"periodic\": { \"day\": [],\"week\": {}}, \"events\": {}}");
+				WriteToFile(json_file.dump());
+			}
+		});
+	}
 }
 
 void BrodcastScher::MainPage::OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs ^ e)

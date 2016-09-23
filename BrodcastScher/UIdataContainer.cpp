@@ -71,11 +71,11 @@ BrodcastScher::DayEventDetail::DayEventDetail(json JSON)
 
 	event_name = JSON["name"].get<std::string>();
 	description = JSON["description"].get<std::string>();
-	repeat_type = JSON["repeat_type "];
+	repeat_type = JSON["repeat_type"];
 
 	int height = (end->wHour * 60 + end->wMinute) - (start->wHour * 60 + start->wMinute);
-	
-	UIobject = ref new DayEvent(Tool::sToS(event_name), Tool::sToS(description), height, Tool::sToS(color_opts[counter_color++%6]));
+	auto time_tag = std::to_string(start->wHour) + ":" + std::to_string(start->wMinute) + " ~ " + std::to_string(end->wHour) + ":" + std::to_string(end->wMinute);
+	UIobject = ref new DayEvent(Tool::sToS(event_name), Tool::sToS(time_tag), height, Tool::sToS(color_opts[counter_color++%6]));
 }
 
 json BrodcastScher::DayEventDetail::toJSON()
