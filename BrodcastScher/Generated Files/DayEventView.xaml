@@ -35,7 +35,7 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             
-            <ListView x:ConnectionId='15' x:Name="theList"  BorderThickness="0,0,2,0" Width="972" Foreground="{x:Null}" Background="#FFE6E6E6" Grid.Row="0"
+            <ListView x:ConnectionId='16' x:Name="theList"  BorderThickness="0,0,2,0" Width="972" Foreground="{x:Null}" Background="#FFE6E6E6" Grid.Row="0"
                       IsItemClickEnabled="True"                              >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
@@ -45,7 +45,7 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate                            >
-                        <Grid x:ConnectionId='17'                          Padding="6"                                                           >
+                        <Grid x:ConnectionId='18'                          Padding="6"                                                           >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
@@ -53,17 +53,17 @@
                             <!--<Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="10" Height="10">
                                 <Image Source="Assets/arrow.png" Stretch="UniformToFill" PointerPressed="Image_PointerPressed"/>
                             </Border>-->
-                            <TextBlock x:ConnectionId='18' Grid.Row="0"                    TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock x:ConnectionId='19' Grid.Row="0"                    TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                             <Grid x:Name="detailGrid" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.Row="1">
-                                <TextBlock x:ConnectionId='19'                      TextWrapping="Wrap"/>
+                                <TextBlock x:ConnectionId='20'                      TextWrapping="Wrap"/>
                             </Grid>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Button x:ConnectionId='16' x:Name="btn_AddEvent" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                           >
+            <Button x:ConnectionId='17' x:Name="btn_AddEvent" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                           >
                 <TextBlock Text="+"></TextBlock>
             </Button>
         </Grid>
@@ -76,9 +76,20 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Event Name" Grid.Row="0" Margin="0, 5"></TextBlock>
+                <TextBox x:ConnectionId='15' x:Name="textbox_eventName" Grid.Row="1" Margin="0, 5"                                            ></TextBox>
+            </Grid>
+
+
+            <Grid Grid.Row="1" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -87,7 +98,7 @@
                 <TextBox x:ConnectionId='14' x:Name="startTimeSec" VerticalAlignment="Bottom" Grid.Column="1"                                       ></TextBox>
             </Grid>
 
-            <Grid Grid.Row="1" >
+            <Grid Grid.Row="2" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -96,7 +107,7 @@
                 <TextBox x:ConnectionId='12' x:Name="endTimeSec" VerticalAlignment="Bottom"                                      Grid.Column="1"></TextBox>
             </Grid>
 
-            <Grid Grid.Row="2"  Margin="5,20,5,5">
+            <Grid Grid.Row="3"  Margin="5,20,5,5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -116,7 +127,7 @@
                 </CheckBox>
             </Grid>
 
-            <Grid Grid.Row="3" Margin="0,20" >
+            <Grid Grid.Row="4" Margin="0,20" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -127,7 +138,7 @@
                           IsItemClickEnabled="True"                                  />
             </Grid>
 
-            <Grid Grid.Row="4" Margin="0,20" >
+            <Grid Grid.Row="5" Margin="0,20" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -144,11 +155,11 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 
-                <Button x:ConnectionId='4'                      Margin="20" Grid.Column="0" HorizontalAlignment="Center">
-                    <TextBlock Text="Finish"></TextBlock>
+                <Button x:ConnectionId='4'                      Margin="20" Grid.Column="0" HorizontalAlignment="Center" Content="Finish">
+                    
                 </Button>
 
-                <Button x:ConnectionId='5'                      Margin="20" Grid.Column="1" HorizontalAlignment="Center" Background="#B2EA0F0F">
+                <Button x:ConnectionId='5'                        Margin="20" Grid.Column="1" HorizontalAlignment="Center" Background="#B2EA0F0F">
                     <TextBlock Text="Delete" Foreground="White"></TextBlock>
                 </Button>
             </Grid>

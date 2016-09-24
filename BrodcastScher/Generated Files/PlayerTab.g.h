@@ -6,6 +6,7 @@
 //     the code is regenerated.
 //------------------------------------------------------------------------------
 
+#include "XamlBindingInfo.g.h"
 
 namespace Windows {
     namespace UI {
@@ -37,14 +38,17 @@ namespace BrodcastScher
     
     private:
         bool _contentLoaded;
+        class PlayerTab_obj6_Bindings;
     
+        ::XamlBindingInfo::XamlBindings^ Bindings;
         private: ::Windows::UI::Xaml::Controls::ProgressBar^ LeastEventProgress;
-        private: ::Windows::UI::Xaml::Controls::Button^ btn_deviceSet;
         private: ::Windows::UI::Xaml::Controls::Button^ btn_start;
         private: ::Windows::UI::Xaml::Controls::Button^ btn_stop;
         private: ::Windows::UI::Xaml::Controls::StackPanel^ equalizerEffectContainer;
         private: ::Windows::UI::Xaml::Controls::ListView^ remain_job_list;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ textbox_currentTime;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ textbox_endTime;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ textbox_startTime;
         private: ::Windows::UI::Xaml::Controls::ToggleSwitch^ eqToggle;
         private: ::Windows::UI::Xaml::Controls::StackPanel^ eq1SliderContainer;
         private: ::Windows::UI::Xaml::Controls::StackPanel^ eq2SliderContainer;

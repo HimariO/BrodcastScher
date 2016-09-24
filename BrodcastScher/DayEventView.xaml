@@ -76,9 +76,20 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Event Name" Grid.Row="0" Margin="0, 5"></TextBlock>
+                <TextBox x:Name="textbox_eventName" Grid.Row="1" Margin="0, 5" TextChanged="textbox_eventName_TextChanged"></TextBox>
+            </Grid>
+
+
+            <Grid Grid.Row="1" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -87,7 +98,7 @@
                 <TextBox x:Name="startTimeSec" VerticalAlignment="Bottom" Grid.Column="1" TextChanged="startTimeSec_TextChanged"></TextBox>
             </Grid>
 
-            <Grid Grid.Row="1" >
+            <Grid Grid.Row="2" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -96,7 +107,7 @@
                 <TextBox x:Name="endTimeSec" VerticalAlignment="Bottom" TextChanged="endTimeSec_TextChanged" Grid.Column="1"></TextBox>
             </Grid>
 
-            <Grid Grid.Row="2"  Margin="5,20,5,5">
+            <Grid Grid.Row="3"  Margin="5,20,5,5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -116,7 +127,7 @@
                 </CheckBox>
             </Grid>
 
-            <Grid Grid.Row="3" Margin="0,20" >
+            <Grid Grid.Row="4" Margin="0,20" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -127,7 +138,7 @@
                           IsItemClickEnabled="True" ItemClick="DevicesList_ItemClick"/>
             </Grid>
 
-            <Grid Grid.Row="4" Margin="0,20" >
+            <Grid Grid.Row="5" Margin="0,20" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -144,11 +155,11 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 
-                <Button Click="Button_Click" Margin="20" Grid.Column="0" HorizontalAlignment="Center">
-                    <TextBlock Text="Finish"></TextBlock>
+                <Button Click="Button_Click" Margin="20" Grid.Column="0" HorizontalAlignment="Center" Content="Finish">
+                    
                 </Button>
 
-                <Button Click="Button_Click" Margin="20" Grid.Column="1" HorizontalAlignment="Center" Background="#B2EA0F0F">
+                <Button Click="Button_Click_1" Margin="20" Grid.Column="1" HorizontalAlignment="Center" Background="#B2EA0F0F">
                     <TextBlock Text="Delete" Foreground="White"></TextBlock>
                 </Button>
             </Grid>

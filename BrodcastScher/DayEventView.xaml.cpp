@@ -102,13 +102,17 @@ void BrodcastScher::DayEventView::Button_Click(Platform::Object^ sender, Windows
 
 void BrodcastScher::DayEventView::DevicesList_ItemClick(Platform::Object^ sender, Windows::UI::Xaml::Controls::ItemClickEventArgs^ e)
 {
-	auto listview = (ListView^)sender;
-	int id = listview->SelectedIndex;
-
-	if (listview->Name == "InputDevicesList") {
+	if (EventSelected != nullptr) {
+		auto listview = (ListView^)sender;
+		unsigned int id = 0;
+		listview->Items->IndexOf(e->ClickedItem, &id);
 		
-	}else if (listview->Name == "OutputDevicesList") {
-
+		if (listview->Name == "InputDevicesList") {
+			EventSelected->input_dev_index = id;
+		}
+		else if (listview->Name == "OutputDevicesList") {
+			EventSelected->output_dev_index = id;
+		}
 	}
 }
 
@@ -272,6 +276,8 @@ void BrodcastScher::DayEventView::UpdateDetailView()
 	if (EventSelected == nullptr)
 		return;
 	
+	textbox_eventName->Text = EventSelected->UIobject->In;
+
 	// update timepicker
 	int64 h = EventSelected->start->wHour * 3600;
 	int64 m = EventSelected->start->wMinute * 60;
@@ -313,14 +319,16 @@ void BrodcastScher::DayEventView::theList_ItemClick(Platform::Object^ sender, Wi
 {
 	auto UIele = (DayEvent^)e->ClickedItem;
 	int a = 1;
-	for (auto _event : EventList) {
-		if (_event.UIobject == UIele) {
-			EventSelected = &_event;
+
+	for (size_t i = 0; i < EventList.size(); i++)
+	{
+		if (EventList[i].UIobject == UIele) {
+			EventSelected = &EventList[i];
+			UpdateDetailView();
 			break;
-		}	
+		}
 	}
 	
-	UpdateDetailView();
 }
 
 
@@ -391,4 +399,29 @@ void BrodcastScher::DayEventView::MenuFlyoutItem_Click(Platform::Object^ sender,
 	else if (tex == "Delete") {
 
 	}
+}
+
+
+void BrodcastScher::DayEventView::textbox_eventName_TextChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::TextChangedEventArgs^ e)
+{
+	auto box = (TextBox^)sender;
+	if (EventSelected != nullptr) {
+		EventSelected->event_name = Tool::STos(box->Text);
+		EventSelected->UIobject->In= box->Text;
+	}
+}
+
+
+// Delete Button Click
+void BrodcastScher::DayEventView::Button_Click_1(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	for (auto iter = EventList.begin(); iter != EventList.end(); iter++) {
+		if (&*iter == EventSelected) {
+			EventList.erase(iter);
+			EventSelected = nullptr;
+			UpdateUIEventList();
+			break;
+		}
+	}
+
 }

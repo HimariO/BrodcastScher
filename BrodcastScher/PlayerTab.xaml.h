@@ -26,14 +26,17 @@ namespace BrodcastScher
 		AudioRely* rely;
 		bool auto_start = false;
 
-		std::vector<DayEventDetail> event_queue;
+		std::vector<DayEventDetail*> event_queue;
 		DayEventDetail * least_started_event;
 
 		std::vector<concurrency::task<bool>> onGoingTask;
-		std::vector<AudioRely> onGoingRely;
+		std::vector<AudioRely*> onGoingRely;
 
 		void btn_start_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-		void InitAudioGraphSetting();
 		void btn_deviceSet_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void btn_stop_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+
+		void InitEventQueue();
+		concurrency::task<void> CreateUpdateTask();
 	};
 }

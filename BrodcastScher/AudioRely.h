@@ -11,11 +11,11 @@ using namespace Windows::Devices::Enumeration;
 
 class AudioRely {
 public:
-	AudioRely(int device_index_i, int device_index_o){
+	AudioRely(int device_index_i, int device_index_o, bool start_after_finish){
 		// Get Input/output DeiveceInfo by Index;
 		auto init_task = concurrency::create_task(DeviceInformation::FindAllAsync(MediaDevice::GetAudioCaptureSelector())).then(
 		[this, device_index_i](DeviceInformationCollection^ devices) {
-			this->DeviceList = devices;
+			//this->DeviceList = devices;
 			if (devices->Size > device_index_i)
 				In_Dev_info = devices->GetAt(device_index_i);
 			
@@ -27,9 +27,12 @@ public:
 			if (devices->Size > device_index_o)
 				Out_Dev_info = devices->GetAt(device_index_o);
 			
-		}).then([this]() { initGraph(); });
-		
-		init_task.wait();
+		})
+		.then([this]() { initGraph().wait(); })
+		.then([this, start_after_finish]() { 
+			if (start_after_finish)
+				StartStreaming(); 
+		});
 	}
 
 	~AudioRely() {
@@ -37,13 +40,21 @@ public:
 	}
 
 
+	//bool operator==(const AudioRely& B) const {
+	//	if (this == &B)
+	//		return true;
+	//	return false;
+	//};
+
 	void StartStreaming() {
-		aGraph->Start();
+		if(aGraph != nullptr)
+			aGraph->Start();
 	}
 
 
 	void StopStreaming() {
-		aGraph->Stop();
+		if (aGraph != nullptr)
+			aGraph->Stop();
 	}
 
 

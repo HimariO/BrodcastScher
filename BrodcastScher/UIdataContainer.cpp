@@ -37,6 +37,7 @@ BrodcastScher::DayEventDetail::DayEventDetail()
 	end = new _SYSTEMTIME();
 	GetSystemTime(start);
 	GetSystemTime(end);
+	UIobject = ref new DayEvent("", "", 0, Tool::sToS(color_opts[counter_color++ % 6]));
 }
 
 
