@@ -278,6 +278,9 @@ void BrodcastScher::DayEventView::UpdateDetailView()
 	
 	textbox_eventName->Text = EventSelected->UIobject->In;
 
+	startTimeSec->Text = EventSelected->start->wSecond + "";
+	endTimeSec->Text = EventSelected->end->wSecond + "";
+
 	// update timepicker
 	int64 h = EventSelected->start->wHour * 3600;
 	int64 m = EventSelected->start->wMinute * 60;
@@ -392,7 +395,7 @@ void BrodcastScher::DayEventView::MenuFlyoutItem_Click(Platform::Object^ sender,
 	if (tex == "Copy") {
 		copyedDetail = eOnRightTap;
 	}
-	else if (tex == " Pase") {
+	else if (tex == "Pase") {
 		EventList.push_back(copyedDetail);
 		UpdateUIEventList();
 	}

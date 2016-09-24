@@ -35,8 +35,8 @@ BrodcastScher::DayEventDetail::DayEventDetail()
 	type = InputType::InputDevice;
 	start = new _SYSTEMTIME();
 	end = new _SYSTEMTIME();
-	GetSystemTime(start);
-	GetSystemTime(end);
+	GetLocalTime(start);
+	GetLocalTime(end);
 	UIobject = ref new DayEvent("", "", 0, Tool::sToS(color_opts[counter_color++ % 6]));
 }
 

@@ -77,6 +77,8 @@ void BrodcastScher::PlayerTab::btn_start_Click(Platform::Object^ sender, Windows
 	for (auto reply_router : onGoingRely) {
 		reply_router->StartStreaming();
 	}
+	auto btn = (Button^)sender;
+	btn->IsEnabled = false;
 }
 
 
@@ -124,13 +126,20 @@ void BrodcastScher::PlayerTab::InitEventQueue()
 concurrency::task<void> BrodcastScher::PlayerTab::CreateUpdateTask()
 {
 	auto _updater = concurrency::create_task([this]() {
-		Windows::Globalization::Calendar c;
-		std::string date_s = Tool::GetDateString(c.Year, c.Month, c.Day);
+		
+		
 
+		Windows::Globalization::Calendar c;
+		c.SetToNow();
+		std::string date_s = Tool::GetDateString(c.Year, c.Month, c.Day);
+		
 		while (true) {
+			auto Now = new _SYSTEMTIME();
+			GetLocalTime(Now);
 			c.SetToNow();
-			auto s_time = c.Hour + " : " + c.Minute + " : " + c.Second;
-			auto t_stamsp = c.Hour * 3600 + c.Minute * 60 + c.Second;
+			
+			auto s_time = Now->wHour + " : " + Now->wMinute + " : " + Now->wSecond;
+			auto t_stamsp = Now->wHour * 3600 + Now->wMinute * 60 + Now->wSecond;
 
 			// Check are we enter a whole new Day
 			if (Tool::GetDateString(c.Year, c.Month, c.Day) != date_s) {
@@ -156,7 +165,7 @@ concurrency::task<void> BrodcastScher::PlayerTab::CreateUpdateTask()
 					double end = least_started_event->end->wHour * 3600 + least_started_event->end->wMinute * 60 + least_started_event->end->wSecond;
 					double start = least_started_event->start->wHour * 3600 + least_started_event->start->wMinute * 60 + least_started_event->start->wSecond;
 
-					LeastEventProgress->Value = 100 * (double)t_stamsp / (end - start);
+					LeastEventProgress->Value = 100 * (double)(t_stamsp- start )/ (end - start);
 				}
 
 			})
@@ -185,8 +194,11 @@ concurrency::task<void> BrodcastScher::PlayerTab::CreateUpdateTask()
 
 						auto rely_task = concurrency::create_task(
 							[this, _event]() {
+							auto _Now = new _SYSTEMTIME();
+							GetLocalTime(_Now);
+							
 							int64 runtime = (_event->end->wHour * 3600 + _event->end->wMinute * 60 + _event->end->wSecond);
-							runtime -= (_event->start->wHour * 3600 + _event->start->wMinute * 60 + _event->start->wSecond);
+							runtime -= _Now->wHour * 3600 + _Now->wMinute * 60 + _Now->wSecond;
 
 							AudioRely *rely = new AudioRely(_event->input_dev_index, _event->output_dev_index, auto_start);
 							onGoingRely.push_back(rely);
@@ -199,6 +211,9 @@ concurrency::task<void> BrodcastScher::PlayerTab::CreateUpdateTask()
 								delete *found;
 								onGoingRely.erase(found);
 							}
+
+							if (least_started_event == _event)
+								least_started_event = nullptr;
 							delete _event;
 							return true;
 						});
