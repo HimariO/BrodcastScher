@@ -114,7 +114,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Current Time" Grid.Row="0" FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Text="00:00:00" Grid.Row="1" Foreground="#FF1C98FF" Margin="10,0,0,0" FontSize="25" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock x:Name="textbox_currentTime" Text="00:00:00" Grid.Row="1" Foreground="#FF1C98FF" Margin="10,0,0,0" FontSize="25" HorizontalAlignment="Center"></TextBlock>
                 </Grid>
 
                 <Grid Grid.Row="1" Margin="10">
@@ -141,7 +141,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Job Remain (Today)" Grid.Row="0" FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <ListView HorizontalAlignment="Center" Grid.Row="1"></ListView>
+                    <ListView x:Name="remain_job_list" HorizontalAlignment="Center" Grid.Row="1"></ListView>
                 </Grid>
             </Grid>
         </Grid>
@@ -152,7 +152,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <ProgressBar IsIndeterminate="False" Maximum="100" Width="800" Value="50" Grid.Row="0" RenderTransformOrigin="0.5,0.5" Margin="0,10,0,10">
+            <ProgressBar x:Name="LeastEventProgress" IsIndeterminate="False" Maximum="100" Width="800" Value="50" Grid.Row="0" RenderTransformOrigin="0.5,0.5" Margin="0,10,0,10">
             </ProgressBar>
 
             <Grid Grid.Row="1">

@@ -32,6 +32,15 @@ Calendar ^ _calendar;
 json this_day_events;
 
 
+bool EventSort(DayEventDetail A, DayEventDetail B) {
+	int A_time = A.start->wHour * 60 + A.start->wMinute;
+	int B_time = B.start->wHour * 60 + B.start->wMinute;
+
+	return A_time < B_time;
+}
+
+
+
 DayEventView::DayEventView()
 {
 	InitializeComponent();
@@ -233,7 +242,7 @@ void BrodcastScher::DayEventView::OnNavigatedTo(Windows::UI::Xaml::Navigation::N
 
 void BrodcastScher::DayEventView::UpdateUIEventList()
 {
-	std::sort(EventList.begin(), EventList.end(), Tool::EventSort);
+	std::sort(EventList.begin(), EventList.end(), EventSort);
 	theList->Items->Clear();
 
 	int pre_start_time = 0;

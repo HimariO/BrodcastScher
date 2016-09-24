@@ -13,7 +13,7 @@ class AudioRely {
 public:
 	AudioRely(int device_index_i, int device_index_o){
 		// Get Input/output DeiveceInfo by Index;
-		concurrency::create_task(DeviceInformation::FindAllAsync(MediaDevice::GetAudioCaptureSelector())).then(
+		auto init_task = concurrency::create_task(DeviceInformation::FindAllAsync(MediaDevice::GetAudioCaptureSelector())).then(
 		[this, device_index_i](DeviceInformationCollection^ devices) {
 			this->DeviceList = devices;
 			if (devices->Size > device_index_i)
@@ -29,6 +29,7 @@ public:
 			
 		}).then([this]() { initGraph(); });
 		
+		init_task.wait();
 	}
 
 	~AudioRely() {
@@ -57,13 +58,13 @@ private:
 	DeviceInformation^ Out_Dev_info;
 	
 
-	void initGraph() {
+	concurrency::task<void> initGraph() {
 		AudioGraphSettings^ graph_setting = ref new AudioGraphSettings(AudioRenderCategory::Media);
 		graph_setting->QuantumSizeSelectionMode = QuantumSizeSelectionMode::LowestLatency;
 		graph_setting->PrimaryRenderDevice = Out_Dev_info;
 		
 
-		concurrency::create_task(AudioGraph::CreateAsync(graph_setting)).then(
+		return concurrency::create_task(AudioGraph::CreateAsync(graph_setting)).then(
 			[this](CreateAudioGraphResult^ result) {
 				if(result->Status != AudioGraphCreationStatus::Success){
 					switch (result->Status) {
@@ -112,7 +113,7 @@ private:
 					}
 				);
 			}
-		);
-	}
+		); //create_task end;
+	} // fucntion end;
 
 };
