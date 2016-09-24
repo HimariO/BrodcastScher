@@ -32,7 +32,7 @@ using namespace Windows::Globalization;
 
 DateTimeFormatter ^time_formater;
 Calendar^ calendar;
-DayEventDetail copyedDetail;
+std::vector<DayEventDetail> copyedDetail;
 
 struct ColorEqual : public std::binary_function<const Color, const Color, bool>
 {

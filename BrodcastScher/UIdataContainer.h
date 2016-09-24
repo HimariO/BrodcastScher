@@ -7,12 +7,15 @@ using json = nlohmann::json;
 namespace BrodcastScher
 {
 	enum InputType { InputDevice, PlayList, AudioFile };
+	class DayEventDetail;
 
 	public ref class DayEvent  sealed {
+	
 		Platform::String ^rIn; //name
 		Platform::String ^rOut; // description
 		Platform::String ^rColor;
 		double itemHeight;
+
 	public:
 		DayEvent(String^ A, String^ B, double h, String^ color);
 

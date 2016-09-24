@@ -11,7 +11,7 @@
 
 using json = nlohmann::json;
 extern json json_file;
-extern BrodcastScher::DayEventDetail copyedDetail;
+extern std::vector<BrodcastScher::DayEventDetail> copyedDetail;
 
 namespace BrodcastScher
 {

@@ -393,10 +393,28 @@ void BrodcastScher::DayEventView::MenuFlyoutItem_Click(Platform::Object^ sender,
 	auto tex = ui->Text;
 
 	if (tex == "Copy") {
-		copyedDetail = eOnRightTap;
+		//copyedDetail = eOnRightTap;
+				
+		for (size_t j = 0; j < EventList.size(); j++)
+		{
+			for (size_t i = 0; i < theList->SelectedItems->Size; i++)
+			{
+				auto temp = (DayEvent^)theList->SelectedItems->GetAt(i);
+				if (EventList[j].UIobject == temp) {
+					copyedDetail.push_back(EventList[j]);
+					theList->SelectedItems->RemoveAt(i);
+					break;
+				}
+			}
+		}
+					
 	}
 	else if (tex == "Pase") {
-		EventList.push_back(copyedDetail);
+		for (size_t i = 0; i < copyedDetail.size(); i++)
+		{
+			EventList.push_back(copyedDetail[i]);
+		}
+		copyedDetail.clear();
 		UpdateUIEventList();
 	}
 	else if (tex == "Delete") {

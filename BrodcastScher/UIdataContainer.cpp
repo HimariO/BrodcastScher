@@ -38,6 +38,7 @@ BrodcastScher::DayEventDetail::DayEventDetail()
 	GetLocalTime(start);
 	GetLocalTime(end);
 	UIobject = ref new DayEvent("", "", 0, Tool::sToS(color_opts[counter_color++ % 6]));
+	//UIobject->setParent ( this);
 }
 
 
@@ -77,6 +78,7 @@ BrodcastScher::DayEventDetail::DayEventDetail(json JSON)
 	int height = (end->wHour * 60 + end->wMinute) - (start->wHour * 60 + start->wMinute);
 	auto time_tag = std::to_string(start->wHour) + ":" + std::to_string(start->wMinute) + " ~ " + std::to_string(end->wHour) + ":" + std::to_string(end->wMinute);
 	UIobject = ref new DayEvent(Tool::sToS(event_name), Tool::sToS(time_tag), height, Tool::sToS(color_opts[counter_color++%6]));
+	//UIobject->setParent(this);
 }
 
 json BrodcastScher::DayEventDetail::toJSON()

@@ -36,7 +36,7 @@
             </Grid.RowDefinitions>
             
             <ListView x:ConnectionId='16' x:Name="theList"  BorderThickness="0,0,2,0" Width="972" Foreground="{x:Null}" Background="#FFE6E6E6" Grid.Row="0"
-                      IsItemClickEnabled="True"                              >
+                      IsItemClickEnabled="True"                               SelectionMode="Extended">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
