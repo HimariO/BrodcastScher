@@ -207,7 +207,7 @@ concurrency::task<void> BrodcastScher::PlayerTab::CreateUpdateTask()
 								break;
 
 							case InputType::AudioFile:
-								rely = new AudioRely(_event->input_file_path, _event->output_dev_index, auto_start);
+								rely = new AudioRely(_event->input_file_path, _event->output_dev_index, auto_start, false);
 								break;
 							}
 							 

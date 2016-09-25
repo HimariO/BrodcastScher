@@ -17,7 +17,6 @@
     <ClCompile Include="MainPage.xaml.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="UIdataContainer.cpp" />
-    <ClCompile Include="BlankPage.xaml.cpp" />
     <ClCompile Include="DayEventView.xaml.cpp" />
     <ClCompile Include="ScheduleTab.xaml.cpp" />
     <ClCompile Include="PlayerTab.xaml.cpp" />
@@ -28,7 +27,6 @@
     <ClInclude Include="App.xaml.h" />
     <ClInclude Include="MainPage.xaml.h" />
     <ClInclude Include="UIdataContainer.h" />
-    <ClInclude Include="BlankPage.xaml.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="DayEventView.xaml.h" />
     <ClInclude Include="ScheduleTab.xaml.h" />

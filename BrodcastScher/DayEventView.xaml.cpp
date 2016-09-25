@@ -502,9 +502,24 @@ void BrodcastScher::DayEventView::check_FileInput_Checked(Platform::Object^ send
 		file_picker->FileTypeFilter->Append(".wma");
 
 		concurrency::create_task(file_picker->PickSingleFileAsync()).then([this](StorageFile^ selected_File) {
-			if (selected_File != nullptr) { // filepicker get canceled.
+			if (selected_File != nullptr) { // filepicker canceled.
 				textbox_FilePath->Text = selected_File->Path;
-				EventSelected->input_file_path = selected_File->Path->Data();
+				EventSelected->input_playlist_path = selected_File->Path->Data();
+				return selected_File->Properties->GetMusicPropertiesAsync();
+			}
+			else {
+				concurrency::cancel_current_task();
+			}
+		}).then([this](concurrency::task<FileProperties::MusicProperties^> _task) {
+			try {
+				FileProperties::MusicProperties^ m_property = _task.get();
+				auto times = m_property->Duration;
+				times.Duration = startTimePicker->Time.Duration + times.Duration;
+
+				endTimePicker->Time = times;
+			}
+			catch (Platform::COMException^ e) {
+				auto debug = e->Message;
 			}
 		});
 		
@@ -534,6 +549,10 @@ void BrodcastScher::DayEventView::check_FileInput_Checked(Platform::Object^ send
 			if (selected_File != nullptr) {
 				textbox_FilePath->Text = selected_File->Path;
 				EventSelected->input_playlist_path = selected_File->Path->Data();
+				//return selected_File->Properties->GetMusicPropertiesAsync();
+			}
+			else {
+				concurrency::cancel_current_task();
 			}
 		});
 	}
