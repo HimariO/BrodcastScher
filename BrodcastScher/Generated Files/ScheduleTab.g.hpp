@@ -34,6 +34,8 @@ void ::BrodcastScher::ScheduleTab::Connect(int __connectionId, ::Platform::Objec
                     (::Windows::UI::Xaml::Controls::CalendarView^, ::Windows::UI::Xaml::Controls::CalendarViewSelectedDatesChangedEventArgs^))&ScheduleTab::Calendar_SelectedDatesChanged);
                 (safe_cast<::Windows::UI::Xaml::Controls::CalendarView^>(this->Calendar))->CalendarViewDayItemChanging += ref new ::Windows::Foundation::TypedEventHandler<::Windows::UI::Xaml::Controls::CalendarView^, ::Windows::UI::Xaml::Controls::CalendarViewDayItemChangingEventArgs^>(this, (void (::BrodcastScher::ScheduleTab::*)
                     (::Windows::UI::Xaml::Controls::CalendarView^, ::Windows::UI::Xaml::Controls::CalendarViewDayItemChangingEventArgs^))&ScheduleTab::Calendar_CalendarViewDayItemChanging);
+                (safe_cast<::Windows::UI::Xaml::Controls::CalendarView^>(this->Calendar))->RightTapped += ref new ::Windows::UI::Xaml::Input::RightTappedEventHandler(this, (void (::BrodcastScher::ScheduleTab::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::Input::RightTappedRoutedEventArgs^))&ScheduleTab::Calendar_RightTapped);
             }
             break;
     }

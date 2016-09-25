@@ -30,8 +30,8 @@ std::string BrodcastScher::DayEventDetail::color_opts[6]{
 
 BrodcastScher::DayEventDetail::DayEventDetail()
 {
-	event_name = "";
-	description = "";
+	event_name;
+	description;
 	type = InputType::InputDevice;
 	start = new _SYSTEMTIME();
 	end = new _SYSTEMTIME();
@@ -59,18 +59,18 @@ BrodcastScher::DayEventDetail::DayEventDetail(json JSON)
 	case 1:
 		type = InputType::InputDevice;
 		input_dev_index = JSON["input_device_index"];
-		output_dev_index = JSON["output_device_index"];
-		break;
-	case 2:
-		type = InputType::PlayList;
-		// unfinish;
 		break;
 	case 3:
+		type = InputType::PlayList;
+		input_playlist_path = JSON["input_playlist"].get<std::wstring>();
+		break;
+	case 2:
 		type = InputType::AudioFile;
-		// unfinish;
+		input_file_path = JSON["input_file"].get<std::wstring>();
 		break;
 	}
 
+	output_dev_index = JSON["output_device_index"];
 	event_name = JSON["name"].get<std::string>();
 	description = JSON["description"].get<std::string>();
 	repeat_type = JSON["repeat_type"];
@@ -90,7 +90,7 @@ json BrodcastScher::DayEventDetail::toJSON()
 		int_type = 1;
 		break;
 	case InputType::PlayList:
-		int_type = 1;
+		int_type = 3;
 		break;
 	case InputType::AudioFile:
 		int_type = 2;
@@ -109,8 +109,8 @@ json BrodcastScher::DayEventDetail::toJSON()
 		{ "inputtype", int_type },
 		{ "input_device_index", input_dev_index },
 		{ "output_device_index", output_dev_index },
-		{ "input_file", "mp3/wav file path" } ,
-		{ "input_playlist", "m3u file path" } ,
+		{ "input_file", input_file_path } ,
+		{ "input_playlist", input_playlist_path } ,
 		{"repeat_type", repeat_type },
 	};
 

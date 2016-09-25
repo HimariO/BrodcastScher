@@ -71,5 +71,8 @@ namespace BrodcastScher
 		InputType type;
 		unsigned int input_dev_index = 0;
 		unsigned int output_dev_index = 0;
+
+		std::wstring input_file_path;
+		std::wstring input_playlist_path;
 	};
 }

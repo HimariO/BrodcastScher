@@ -121,6 +121,18 @@ void BrodcastScher::ScheduleTab::Calendar_CalendarViewDayItemChanging(Windows::U
 
 	if(d % 2 == 0) // Give event date some Color.
 		args->Item->Background = ref new SolidColorBrush(Windows::UI::Colors::LightBlue);
+	else
+		args->Item->Background = ref new SolidColorBrush(Windows::UI::Colors::White);
 }
 
 
+
+
+void BrodcastScher::ScheduleTab::Calendar_RightTapped(Platform::Object^ sender, Windows::UI::Xaml::Input::RightTappedRoutedEventArgs^ e)
+{
+
+	auto calendar = (CalendarView^)sender;
+
+	auto ContextMenu = (MenuFlyout^) this->Resources->Lookup("mContextMenu");
+	ContextMenu->ShowAt(nullptr, e->GetPosition(nullptr));
+}

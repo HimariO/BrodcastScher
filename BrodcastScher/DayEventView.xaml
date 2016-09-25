@@ -20,21 +20,21 @@
             </MenuFlyoutSubItem>-->
         </MenuFlyout>
     </Page.Resources>
-    
-    
+
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
+
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            
+
             <ListView x:Name="theList"  BorderThickness="0,0,2,0" Width="972" Foreground="{x:Null}" Background="#FFE6E6E6" Grid.Row="0"
                       IsItemClickEnabled="True" ItemClick="theList_ItemClick" SelectionMode="Extended">
                 <ListView.ItemContainerStyle>
@@ -67,102 +67,127 @@
                 <TextBlock Text="+"></TextBlock>
             </Button>
         </Grid>
-
-        <Grid Grid.Column="1" Padding="20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0" >
+        <ScrollViewer Grid.Column="1">
+            <Grid Padding="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <TextBlock Text="Event Name" Grid.Row="0" Margin="0, 5"></TextBlock>
-                <TextBox x:Name="textbox_eventName" Grid.Row="1" Margin="0, 5" TextChanged="textbox_eventName_TextChanged"></TextBox>
-            </Grid>
-
-
-            <Grid Grid.Row="1" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TimePicker x:Name="startTimePicker" Header="Start time" Grid.Column="0" TimeChanged="startTimePicker_TimeChanged"/>
-                <TextBox x:Name="startTimeSec" VerticalAlignment="Bottom" Grid.Column="1" TextChanged="startTimeSec_TextChanged"></TextBox>
-            </Grid>
-
-            <Grid Grid.Row="2" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TimePicker x:Name="endTimePicker" Header="End time" Grid.Column="0" TimeChanged="endTimePicker_TimeChanged"/>
-                <TextBox x:Name="endTimeSec" VerticalAlignment="Bottom" TextChanged="endTimeSec_TextChanged" Grid.Column="1"></TextBox>
-            </Grid>
-
-            <Grid Grid.Row="3"  Margin="5,20,5,5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                
-                <CheckBox Grid.Column="0" x:Name="check_EveryDay" Checked="check_EveryDay_Checked">
-                    <TextBlock Text="EveryDay"></TextBlock>
-                </CheckBox>
-
-                <CheckBox Grid.Column="1" x:Name="check_EveryWeek" Checked="check_EveryDay_Checked">
-                    <TextBlock Text="EveryWeek"></TextBlock>
-                </CheckBox>
-
-                <CheckBox Grid.Column="2" x:Name="check_EveryMonth" Checked="check_EveryDay_Checked">
-                    <TextBlock Text="EveryMonth"></TextBlock>
-                </CheckBox>
-            </Grid>
-
-            <Grid Grid.Row="4" Margin="0,20" >
-                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                
-                <TextBlock Text="Input Device" Margin="0,10" Grid.Row="0"></TextBlock>
-                <ListView x:Name="InputDevicesList"  Height="200"  BorderBrush="#FFC9C9C9" BorderThickness="0,1" Padding="10" Grid.Row="1"
+
+                <Grid Grid.Row="0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Event Name" Grid.Row="0" Margin="0, 5"></TextBlock>
+                    <TextBox x:Name="textbox_eventName" Grid.Row="1" Margin="0, 5" TextChanged="textbox_eventName_TextChanged"></TextBox>
+                </Grid>
+
+
+                <Grid Grid.Row="1" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TimePicker x:Name="startTimePicker" Header="Start time" Grid.Column="0" TimeChanged="startTimePicker_TimeChanged"/>
+                    <TextBox x:Name="startTimeSec" VerticalAlignment="Bottom" Grid.Column="1" TextChanged="startTimeSec_TextChanged"></TextBox>
+                </Grid>
+
+                <Grid Grid.Row="2" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TimePicker x:Name="endTimePicker" Header="End time" Grid.Column="0" TimeChanged="endTimePicker_TimeChanged"/>
+                    <TextBox x:Name="endTimeSec" VerticalAlignment="Bottom" TextChanged="endTimeSec_TextChanged" Grid.Column="1"></TextBox>
+                </Grid>
+
+                <Grid Grid.Row="3"  Margin="5,20,5,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox Grid.Column="0" x:Name="check_EveryDay" Checked="check_EveryDay_Checked">
+                        <TextBlock Text="EveryDay"></TextBlock>
+                    </CheckBox>
+
+                    <CheckBox Grid.Column="1" x:Name="check_EveryWeek" Checked="check_EveryDay_Checked">
+                        <TextBlock Text="EveryWeek"></TextBlock>
+                    </CheckBox>
+
+                    <CheckBox Grid.Column="2" x:Name="check_EveryMonth" Checked="check_EveryDay_Checked">
+                        <TextBlock Text="EveryMonth"></TextBlock>
+                    </CheckBox>
+                </Grid>
+
+                <Grid Grid.Row="4" Margin="0,20" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox Grid.Column="0" x:Name="check_FileInput" Checked="check_FileInput_Checked">
+                            <TextBlock Text="Using File Input"></TextBlock>
+                        </CheckBox>
+
+                        <CheckBox Grid.Column="1" x:Name="check_Deviceinput" Checked="check_FileInput_Checked" Margin="10, 0">
+                            <TextBlock Text="Using Device Input"></TextBlock>
+                        </CheckBox>
+
+                        <CheckBox Grid.Column="2" x:Name="check_PlayListInput" Checked="check_FileInput_Checked">
+                            <TextBlock Text="Using Playlist Input"></TextBlock>
+                        </CheckBox>
+                    </Grid>
+
+                    <TextBlock x:Name="textbox_FilePath" Text="..." Margin="0,10" Grid.Row="1"></TextBlock>
+                    <TextBlock Text="Input Device" Margin="0,10" Grid.Row="2"></TextBlock>
+                    <ListView x:Name="InputDevicesList"  Height="200"  BorderBrush="#FFC9C9C9" BorderThickness="0,1" Padding="10" Grid.Row="3"
                           IsItemClickEnabled="True" ItemClick="DevicesList_ItemClick"/>
-            </Grid>
+                </Grid>
 
-            <Grid Grid.Row="5" Margin="0,20" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+                <Grid Grid.Row="5" Margin="0,20" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                <TextBlock Text="Output Device" Margin="0,10" Grid.Row="0"></TextBlock>
-                <ListView x:Name="OutputDevicesList"  Height="200"  BorderBrush="#FFC9C9C9" BorderThickness="0,1" Padding="10" Grid.Row="1"
+                    <TextBlock Text="Output Device" Margin="0,10" Grid.Row="0"></TextBlock>
+                    <ListView x:Name="OutputDevicesList"  Height="200"  BorderBrush="#FFC9C9C9" BorderThickness="0,1" Padding="10" Grid.Row="1"
                           IsItemClickEnabled="True" ItemClick="DevicesList_ItemClick"/>
-            </Grid>
+                </Grid>
 
-            <Grid Grid.Row="6">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                
-                <Button Click="Button_Click" Margin="20" Grid.Column="0" HorizontalAlignment="Center" Content="Finish">
-                    
-                </Button>
+                <Grid Grid.Row="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                <Button Click="Button_Click_1" Margin="20" Grid.Column="1" HorizontalAlignment="Center" Background="#B2EA0F0F">
-                    <TextBlock Text="Delete" Foreground="White"></TextBlock>
-                </Button>
+                    <Button Click="Button_Click" Margin="20" Grid.Column="0" HorizontalAlignment="Center" Content="Finish">
+
+                    </Button>
+
+                    <Button Click="Button_Click_1" Margin="20" Grid.Column="1" HorizontalAlignment="Center" Background="#B2EA0F0F">
+                        <TextBlock Text="Delete" Foreground="White"></TextBlock>
+                    </Button>
+                </Grid>
             </Grid>
-        </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

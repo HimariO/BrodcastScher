@@ -171,7 +171,7 @@ concurrency::task<void> BrodcastScher::PlayerTab::CreateUpdateTask()
 			})
 			);
 
-			// Check for task start.
+			// Check for evnet start.
 			if (!event_queue.empty())
 				for (auto _event : event_queue) {
 					auto s_t = _event->start;
@@ -199,8 +199,18 @@ concurrency::task<void> BrodcastScher::PlayerTab::CreateUpdateTask()
 							
 							int64 runtime = (_event->end->wHour * 3600 + _event->end->wMinute * 60 + _event->end->wSecond);
 							runtime -= _Now->wHour * 3600 + _Now->wMinute * 60 + _Now->wSecond;
+							
+							AudioRely *rely = nullptr;
+							switch (_event->type) {
+							case InputType::InputDevice:
+								rely = new AudioRely(_event->input_dev_index, _event->output_dev_index, auto_start);
+								break;
 
-							AudioRely *rely = new AudioRely(_event->input_dev_index, _event->output_dev_index, auto_start);
+							case InputType::AudioFile:
+								rely = new AudioRely(_event->input_file_path, _event->output_dev_index, auto_start);
+								break;
+							}
+							 
 							onGoingRely.push_back(rely);
 
 							Sleep(runtime * 1000);

@@ -6,9 +6,23 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
+    
+    <Page.Resources>
+        <MenuFlyout x:Key="mContextMenu">
+            <MenuFlyoutItem Text="Copy" Tag="&#xE1A5;"  />
+            <MenuFlyoutItem Text="Pase" Tag="&#xE2F6;" />
+            <MenuFlyoutItem Text="Delete" Tag="&#xE10A;" />
+            <!--<MenuFlyoutSubItem Text="Other">
+                <MenuFlyoutItem Text="Sort by" />
+                <MenuFlyoutItem Text="Name" />
+                <MenuFlyoutItem Text="Date" />
+                <MenuFlyoutItem Text="Size" />
+            </MenuFlyoutSubItem>-->
+        </MenuFlyout>
+    </Page.Resources>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <CalendarView x:ConnectionId='1' x:Name="Calendar" DisplayMode="Month" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"                                                                                                                        />
+        <CalendarView x:ConnectionId='1' x:Name="Calendar" DisplayMode="Month" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"                                                                                                                                                           />
     </Grid>
 </Page>
 

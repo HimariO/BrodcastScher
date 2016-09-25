@@ -27,11 +27,11 @@ void ::BrodcastScher::DayEventView::InitializeComponent()
 /// <summary>
 /// Auto generated class for compiled bindings.
 /// </summary>
-class BrodcastScher::DayEventView::DayEventView_obj18_Bindings 
+class BrodcastScher::DayEventView::DayEventView_obj22_Bindings 
     : public ::XamlBindingInfo::XamlBindingsBase<::BrodcastScher::DayEvent>
 {
 public:
-    DayEventView_obj18_Bindings()
+    DayEventView_obj22_Bindings()
     {
     }
 
@@ -39,14 +39,14 @@ public:
     {
         switch(__connectionId)
         {
-            case 18:
-                this->obj18 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
+            case 22:
+                this->obj22 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
                 break;
-            case 19:
-                this->obj19 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            case 23:
+                this->obj23 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 break;
-            case 20:
-                this->obj20 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            case 24:
+                this->obj24 = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
                 break;
         }
     }
@@ -76,9 +76,9 @@ public:
     }
 private:
     // Fields for each control that has bindings.
-    ::Platform::WeakReference obj18;
-    ::Windows::UI::Xaml::Controls::TextBlock^ obj19;
-    ::Windows::UI::Xaml::Controls::TextBlock^ obj20;
+    ::Platform::WeakReference obj22;
+    ::Windows::UI::Xaml::Controls::TextBlock^ obj23;
+    ::Windows::UI::Xaml::Controls::TextBlock^ obj24;
 
     // Update methods for each path node used in binding steps.
     void Update_(::BrodcastScher::DayEvent^ obj, int phase)
@@ -98,28 +98,28 @@ private:
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_FrameworkElement_Height(this->obj18.Resolve<::Windows::UI::Xaml::Controls::Grid>(), obj);
+            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_FrameworkElement_Height(this->obj22.Resolve<::Windows::UI::Xaml::Controls::Grid>(), obj);
         }
     }
     void Update_Color(::Platform::String^ obj, int phase)
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_Panel_Background(this->obj18.Resolve<::Windows::UI::Xaml::Controls::Grid>(), (::Windows::UI::Xaml::Media::Brush^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Windows::UI::Xaml::Media::Brush::typeid, obj), nullptr);
+            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_Panel_Background(this->obj22.Resolve<::Windows::UI::Xaml::Controls::Grid>(), (::Windows::UI::Xaml::Media::Brush^) ::Windows::UI::Xaml::Markup::XamlBindingHelper::ConvertValue(::Windows::UI::Xaml::Media::Brush::typeid, obj), nullptr);
         }
     }
     void Update_In(::Platform::String^ obj, int phase)
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj19, obj, nullptr);
+            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj23, obj, nullptr);
         }
     }
     void Update_Out(::Platform::String^ obj, int phase)
     {
         if((phase & ((1 << 0) | NOT_PHASED )) != 0)
         {
-            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj20, obj, nullptr);
+            ::XamlBindingInfo::XamlBindingSetters::Set_Windows_UI_Xaml_Controls_TextBlock_Text(this->obj24, obj, nullptr);
         }
     }
 };
@@ -172,85 +172,111 @@ void ::BrodcastScher::DayEventView::Connect(int __connectionId, ::Platform::Obje
             break;
         case 7:
             {
+                this->textbox_FilePath = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+            }
+            break;
+        case 8:
+            {
                 this->InputDevicesList = safe_cast<::Windows::UI::Xaml::Controls::ListView^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::ListView^>(this->InputDevicesList))->ItemClick += ref new ::Windows::UI::Xaml::Controls::ItemClickEventHandler(this, (void (::BrodcastScher::DayEventView::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::Controls::ItemClickEventArgs^))&DayEventView::DevicesList_ItemClick);
             }
             break;
-        case 8:
+        case 9:
+            {
+                this->check_FileInput = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(this->check_FileInput))->Checked += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::BrodcastScher::DayEventView::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&DayEventView::check_FileInput_Checked);
+            }
+            break;
+        case 10:
+            {
+                this->check_Deviceinput = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(this->check_Deviceinput))->Checked += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::BrodcastScher::DayEventView::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&DayEventView::check_FileInput_Checked);
+            }
+            break;
+        case 11:
+            {
+                this->check_PlayListInput = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(this->check_PlayListInput))->Checked += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::BrodcastScher::DayEventView::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&DayEventView::check_FileInput_Checked);
+            }
+            break;
+        case 12:
             {
                 this->check_EveryDay = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(this->check_EveryDay))->Checked += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::BrodcastScher::DayEventView::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&DayEventView::check_EveryDay_Checked);
             }
             break;
-        case 9:
+        case 13:
             {
                 this->check_EveryWeek = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(this->check_EveryWeek))->Checked += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::BrodcastScher::DayEventView::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&DayEventView::check_EveryDay_Checked);
             }
             break;
-        case 10:
+        case 14:
             {
                 this->check_EveryMonth = safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::CheckBox^>(this->check_EveryMonth))->Checked += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::BrodcastScher::DayEventView::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&DayEventView::check_EveryDay_Checked);
             }
             break;
-        case 11:
+        case 15:
             {
                 this->endTimePicker = safe_cast<::Windows::UI::Xaml::Controls::TimePicker^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::TimePicker^>(this->endTimePicker))->TimeChanged += ref new ::Windows::Foundation::EventHandler<::Windows::UI::Xaml::Controls::TimePickerValueChangedEventArgs^>(this, (void (::BrodcastScher::DayEventView::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::Controls::TimePickerValueChangedEventArgs^))&DayEventView::endTimePicker_TimeChanged);
             }
             break;
-        case 12:
+        case 16:
             {
                 this->endTimeSec = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(this->endTimeSec))->TextChanged += ref new ::Windows::UI::Xaml::Controls::TextChangedEventHandler(this, (void (::BrodcastScher::DayEventView::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::Controls::TextChangedEventArgs^))&DayEventView::endTimeSec_TextChanged);
             }
             break;
-        case 13:
+        case 17:
             {
                 this->startTimePicker = safe_cast<::Windows::UI::Xaml::Controls::TimePicker^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::TimePicker^>(this->startTimePicker))->TimeChanged += ref new ::Windows::Foundation::EventHandler<::Windows::UI::Xaml::Controls::TimePickerValueChangedEventArgs^>(this, (void (::BrodcastScher::DayEventView::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::Controls::TimePickerValueChangedEventArgs^))&DayEventView::startTimePicker_TimeChanged);
             }
             break;
-        case 14:
+        case 18:
             {
                 this->startTimeSec = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(this->startTimeSec))->TextChanged += ref new ::Windows::UI::Xaml::Controls::TextChangedEventHandler(this, (void (::BrodcastScher::DayEventView::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::Controls::TextChangedEventArgs^))&DayEventView::startTimeSec_TextChanged);
             }
             break;
-        case 15:
+        case 19:
             {
                 this->textbox_eventName = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(this->textbox_eventName))->TextChanged += ref new ::Windows::UI::Xaml::Controls::TextChangedEventHandler(this, (void (::BrodcastScher::DayEventView::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::Controls::TextChangedEventArgs^))&DayEventView::textbox_eventName_TextChanged);
             }
             break;
-        case 16:
+        case 20:
             {
                 this->theList = safe_cast<::Windows::UI::Xaml::Controls::ListView^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::ListView^>(this->theList))->ItemClick += ref new ::Windows::UI::Xaml::Controls::ItemClickEventHandler(this, (void (::BrodcastScher::DayEventView::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::Controls::ItemClickEventArgs^))&DayEventView::theList_ItemClick);
             }
             break;
-        case 17:
+        case 21:
             {
                 this->btn_AddEvent = safe_cast<::Windows::UI::Xaml::Controls::Button^>(__target);
                 (safe_cast<::Windows::UI::Xaml::Controls::Button^>(this->btn_AddEvent))->Click += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::BrodcastScher::DayEventView::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&DayEventView::btn_AddEvent_Click);
             }
             break;
-        case 18:
+        case 22:
             {
-                ::Windows::UI::Xaml::Controls::Grid^ element18 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
-                (safe_cast<::Windows::UI::Xaml::Controls::Grid^>(element18))->RightTapped += ref new ::Windows::UI::Xaml::Input::RightTappedEventHandler(this, (void (::BrodcastScher::DayEventView::*)
+                ::Windows::UI::Xaml::Controls::Grid^ element22 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Grid^>(element22))->RightTapped += ref new ::Windows::UI::Xaml::Input::RightTappedEventHandler(this, (void (::BrodcastScher::DayEventView::*)
                     (::Platform::Object^, ::Windows::UI::Xaml::Input::RightTappedRoutedEventArgs^))&DayEventView::Grid_RightTapped);
             }
             break;
@@ -263,14 +289,14 @@ void ::BrodcastScher::DayEventView::Connect(int __connectionId, ::Platform::Obje
     ::XamlBindingInfo::XamlBindings^ bindings = nullptr;
     switch (__connectionId)
     {
-        case 18:
+        case 22:
             {
-                ::Windows::UI::Xaml::Controls::Grid^ element18 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
-                DayEventView_obj18_Bindings* objBindings = new DayEventView_obj18_Bindings();
-                objBindings->SetDataRoot(element18->DataContext);
+                ::Windows::UI::Xaml::Controls::Grid^ element22 = safe_cast<::Windows::UI::Xaml::Controls::Grid^>(__target);
+                DayEventView_obj22_Bindings* objBindings = new DayEventView_obj22_Bindings();
+                objBindings->SetDataRoot(element22->DataContext);
                 bindings = ref new ::XamlBindingInfo::XamlBindings(objBindings);
-                bindings->SubscribeForDataContextChanged(element18);
-                ::Windows::UI::Xaml::DataTemplate::SetExtensionInstance(element18, bindings);
+                bindings->SubscribeForDataContextChanged(element22);
+                ::Windows::UI::Xaml::DataTemplate::SetExtensionInstance(element22, bindings);
             }
             break;
     }

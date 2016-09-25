@@ -315,6 +315,34 @@ void BrodcastScher::DayEventView::UpdateDetailView()
 		check_EveryWeek->IsChecked = false;
 		check_EveryMonth->IsChecked = false;
 	}
+
+	switch (EventSelected->type) {
+	case InputType::InputDevice:
+		input_check_setby_fucntion = true;
+
+		check_Deviceinput->IsChecked = true;
+		check_FileInput->IsChecked = false;
+		check_PlayListInput->IsChecked = false;
+		textbox_FilePath->Text = "...";
+		break;
+	case InputType::AudioFile:
+		input_check_setby_fucntion = true;
+
+		check_Deviceinput->IsChecked = false;
+		check_FileInput->IsChecked = true;
+		check_PlayListInput->IsChecked = false;
+		textbox_FilePath->Text = ref new Platform::String(EventSelected->input_file_path.c_str());
+		break;
+	case InputType::PlayList:
+		input_check_setby_fucntion = true;
+
+		check_Deviceinput->IsChecked = false;
+		check_FileInput->IsChecked = false;
+		check_PlayListInput->IsChecked = true;
+		textbox_FilePath->Text = ref new Platform::String(EventSelected->input_playlist_path.c_str());
+	}
+
+	
 }
 
 
@@ -394,7 +422,8 @@ void BrodcastScher::DayEventView::MenuFlyoutItem_Click(Platform::Object^ sender,
 
 	if (tex == "Copy") {
 		//copyedDetail = eOnRightTap;
-				
+		copyedDetail.clear();
+
 		for (size_t j = 0; j < EventList.size(); j++)
 		{
 			for (size_t i = 0; i < theList->SelectedItems->Size; i++)
@@ -414,7 +443,7 @@ void BrodcastScher::DayEventView::MenuFlyoutItem_Click(Platform::Object^ sender,
 		{
 			EventList.push_back(copyedDetail[i]);
 		}
-		copyedDetail.clear();
+		
 		UpdateUIEventList();
 	}
 	else if (tex == "Delete") {
@@ -445,4 +474,68 @@ void BrodcastScher::DayEventView::Button_Click_1(Platform::Object^ sender, Windo
 		}
 	}
 
+}
+
+
+void BrodcastScher::DayEventView::check_FileInput_Checked(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	using namespace Windows::Storage;
+	auto Name = ((CheckBox^)sender)->Name;
+	
+	if (input_check_setby_fucntion || EventSelected == nullptr) {
+		input_check_setby_fucntion = false;
+		return;
+	}
+
+	if (Name == "check_FileInput") {
+		check_Deviceinput->IsChecked = false;
+		check_PlayListInput->IsChecked = false;
+		
+		InputDevicesList->IsEnabled = false;
+
+		if (EventSelected != nullptr)
+			EventSelected->type = InputType::AudioFile;
+
+		Pickers::FileOpenPicker^ file_picker = ref new Pickers::FileOpenPicker();
+		file_picker->FileTypeFilter->Append(".mp3");
+		file_picker->FileTypeFilter->Append(".wav");
+		file_picker->FileTypeFilter->Append(".wma");
+
+		concurrency::create_task(file_picker->PickSingleFileAsync()).then([this](StorageFile^ selected_File) {
+			if (selected_File != nullptr) { // filepicker get canceled.
+				textbox_FilePath->Text = selected_File->Path;
+				EventSelected->input_file_path = selected_File->Path->Data();
+			}
+		});
+		
+	}
+	else if (Name == "check_Deviceinput") {
+		check_FileInput->IsChecked = false;
+		check_PlayListInput->IsChecked = false;
+
+		InputDevicesList->IsEnabled = true;
+
+		if (EventSelected != nullptr)
+			EventSelected->type = InputType::InputDevice;
+	}
+	else if (Name == "check_PlayListInput") {
+		check_FileInput->IsChecked = false;
+		check_Deviceinput->IsChecked = false;
+
+		InputDevicesList->IsEnabled = false;
+
+		if (EventSelected != nullptr)
+			EventSelected->type = InputType::PlayList;
+
+		Pickers::FileOpenPicker^ file_picker = ref new Pickers::FileOpenPicker();
+		file_picker->FileTypeFilter->Append(".m3u");
+
+		concurrency::create_task(file_picker->PickSingleFileAsync()).then([this](StorageFile^ selected_File) {
+			if (selected_File != nullptr) {
+				textbox_FilePath->Text = selected_File->Path;
+				EventSelected->input_playlist_path = selected_File->Path->Data();
+			}
+		});
+	}
+	
 }
