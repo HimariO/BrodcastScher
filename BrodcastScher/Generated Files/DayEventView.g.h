@@ -37,7 +37,7 @@ namespace BrodcastScher
     
     private:
         bool _contentLoaded;
-        class DayEventView_obj22_Bindings;
+        class DayEventView_obj23_Bindings;
     
         ::XamlBindingInfo::XamlBindings^ Bindings;
         private: ::Windows::UI::Xaml::Controls::ListView^ OutputDevicesList;

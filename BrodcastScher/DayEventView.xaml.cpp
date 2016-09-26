@@ -180,6 +180,9 @@ void BrodcastScher::DayEventView::endTimeSec_TextChanged(Platform::Object^ sende
 
 void BrodcastScher::DayEventView::OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs ^ e)
 {
+	startTimePicker->IsEnabled = false;
+	endTimePicker->IsEnabled = false;
+
 	DateTime para = (DateTime)e->Parameter;
 	_calendar->SetDateTime(para);
 	auto s_time = Tool::GetDateString(_calendar->Year, _calendar->Month, _calendar->Day);
@@ -232,15 +235,6 @@ void BrodcastScher::DayEventView::OnNavigatedTo(Windows::UI::Xaml::Navigation::N
 	
 
 	UpdateUIEventList();
-
-	//auto rootFrame = dynamic_cast<Windows::UI::Xaml::Controls::Frame^>(Window::Current->Content);
-
-	//if (rootFrame->CanGoBack)
-	//{
-	//	// If we have pages in our in-app backstack and have opted in to showing back, do so
-	//	Windows::UI::Core::SystemNavigationManager::GetForCurrentView()->AppViewBackButtonVisibility =
-	//		Windows::UI::Core::AppViewBackButtonVisibility::Visible;
-	//}
 }
 
 
@@ -259,22 +253,29 @@ void BrodcastScher::DayEventView::UpdateUIEventList()
 			data.UIobject->itemH -= pre_end_time - current;
 		else {
 			int EmptyH = current - pre_end_time;
-			theList->Items->Append(ref new DayEvent("Empty", "", EmptyH, "#FFF4F4F4"));
+			theList->Items->Append(ref new DayEvent("EMPTY", "", EmptyH, "#FFF4F4F4"));
 		}
 		pre_end_time = data.end->wHour * 60 + data.end->wMinute;
 		theList->Items->Append(data.UIobject);
 	}
 
 	if (pre_end_time < 24 * 60) {
-		theList->Items->Append(ref new DayEvent("Empty", "", 24 * 60 - pre_end_time, "#FFF4F4F4"));
+		theList->Items->Append(ref new DayEvent("EMPTY", "", 24 * 60 - pre_end_time, "#FFF4F4F4"));
 	}
 }
 
 
 void BrodcastScher::DayEventView::UpdateDetailView()
 {
-	if (EventSelected == nullptr)
+	if (EventSelected == nullptr) {
+		startTimePicker->IsEnabled = false;
+		endTimePicker->IsEnabled = false;
 		return;
+	}
+	else {
+		startTimePicker->IsEnabled = true;
+		endTimePicker->IsEnabled = true;
+	}
 	
 	textbox_eventName->Text = EventSelected->UIobject->In;
 
@@ -504,7 +505,7 @@ void BrodcastScher::DayEventView::check_FileInput_Checked(Platform::Object^ send
 		concurrency::create_task(file_picker->PickSingleFileAsync()).then([this](StorageFile^ selected_File) {
 			if (selected_File != nullptr) { // filepicker canceled.
 				textbox_FilePath->Text = selected_File->Path;
-				EventSelected->input_playlist_path = selected_File->Path->Data();
+				EventSelected->input_file_path = selected_File->Path->Data();
 				return selected_File->Properties->GetMusicPropertiesAsync();
 			}
 			else {
@@ -557,4 +558,10 @@ void BrodcastScher::DayEventView::check_FileInput_Checked(Platform::Object^ send
 		});
 	}
 	
+}
+
+
+void BrodcastScher::DayEventView::Button_Click_2(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	UpdateUIEventList();
 }

@@ -25,6 +25,8 @@ namespace BrodcastScher
 	private:
 		AudioRely* rely;
 		bool auto_start = false;
+		std::vector<Platform::String^> DeviceList_out;
+		std::vector<Platform::String^> DeviceList_in;
 
 		std::vector<DayEventDetail*> event_queue;
 		DayEventDetail * least_started_event;

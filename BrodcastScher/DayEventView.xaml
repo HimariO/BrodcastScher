@@ -177,13 +177,16 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Click="Button_Click" Margin="20" Grid.Column="0" HorizontalAlignment="Center" Content="Finish">
-
+                    <Button Click="Button_Click" Margin="20" Grid.Column="0" HorizontalAlignment="Center" Content="GoBack">
                     </Button>
 
-                    <Button Click="Button_Click_1" Margin="20" Grid.Column="1" HorizontalAlignment="Center" Background="#B2EA0F0F">
+                    <Button Click="Button_Click_2" Margin="20" Grid.Column="1" HorizontalAlignment="Center" Content="Finish">
+                    </Button>
+
+                    <Button Click="Button_Click_1" Margin="20" Grid.Column="2" HorizontalAlignment="Center" Background="#B2EA0F0F">
                         <TextBlock Text="Delete" Foreground="White"></TextBlock>
                     </Button>
                 </Grid>

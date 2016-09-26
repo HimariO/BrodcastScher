@@ -35,7 +35,7 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <ListView x:ConnectionId='20' x:Name="theList"  BorderThickness="0,0,2,0" Width="972" Foreground="{x:Null}" Background="#FFE6E6E6" Grid.Row="0"
+            <ListView x:ConnectionId='21' x:Name="theList"  BorderThickness="0,0,2,0" Width="972" Foreground="{x:Null}" Background="#FFE6E6E6" Grid.Row="0"
                       IsItemClickEnabled="True"                               SelectionMode="Extended">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
@@ -45,7 +45,7 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate                            >
-                        <Grid x:ConnectionId='22'                          Padding="6"                                                           >
+                        <Grid x:ConnectionId='23'                          Padding="6"                                                           >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
@@ -53,17 +53,17 @@
                             <!--<Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="10" Height="10">
                                 <Image Source="Assets/arrow.png" Stretch="UniformToFill" PointerPressed="Image_PointerPressed"/>
                             </Border>-->
-                            <TextBlock x:ConnectionId='23' Grid.Row="0"                    TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock x:ConnectionId='24' Grid.Row="0"                    TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                             <Grid x:Name="detailGrid" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.Row="1">
-                                <TextBlock x:ConnectionId='24'                      TextWrapping="Wrap"/>
+                                <TextBlock x:ConnectionId='25'                      TextWrapping="Wrap"/>
                             </Grid>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Button x:ConnectionId='21' x:Name="btn_AddEvent" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                           >
+            <Button x:ConnectionId='22' x:Name="btn_AddEvent" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                           >
                 <TextBlock Text="+"></TextBlock>
             </Button>
         </Grid>
@@ -85,7 +85,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Event Name" Grid.Row="0" Margin="0, 5"></TextBlock>
-                    <TextBox x:ConnectionId='19' x:Name="textbox_eventName" Grid.Row="1" Margin="0, 5"                                            ></TextBox>
+                    <TextBox x:ConnectionId='20' x:Name="textbox_eventName" Grid.Row="1" Margin="0, 5"                                            ></TextBox>
                 </Grid>
 
 
@@ -94,8 +94,8 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TimePicker x:ConnectionId='17' x:Name="startTimePicker" Header="Start time" Grid.Column="0"                                          />
-                    <TextBox x:ConnectionId='18' x:Name="startTimeSec" VerticalAlignment="Bottom" Grid.Column="1"                                       ></TextBox>
+                    <TimePicker x:ConnectionId='18' x:Name="startTimePicker" Header="Start time" Grid.Column="0"                                          />
+                    <TextBox x:ConnectionId='19' x:Name="startTimeSec" VerticalAlignment="Bottom" Grid.Column="1"                                       ></TextBox>
                 </Grid>
 
                 <Grid Grid.Row="2" >
@@ -103,8 +103,8 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TimePicker x:ConnectionId='15' x:Name="endTimePicker" Header="End time" Grid.Column="0"                                        />
-                    <TextBox x:ConnectionId='16' x:Name="endTimeSec" VerticalAlignment="Bottom"                                      Grid.Column="1"></TextBox>
+                    <TimePicker x:ConnectionId='16' x:Name="endTimePicker" Header="End time" Grid.Column="0"                                        />
+                    <TextBox x:ConnectionId='17' x:Name="endTimeSec" VerticalAlignment="Bottom"                                      Grid.Column="1"></TextBox>
                 </Grid>
 
                 <Grid Grid.Row="3"  Margin="5,20,5,5">
@@ -114,15 +114,15 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox x:ConnectionId='12' Grid.Column="0" x:Name="check_EveryDay"                                 >
+                    <CheckBox x:ConnectionId='13' Grid.Column="0" x:Name="check_EveryDay"                                 >
                         <TextBlock Text="EveryDay"></TextBlock>
                     </CheckBox>
 
-                    <CheckBox x:ConnectionId='13' Grid.Column="1" x:Name="check_EveryWeek"                                 >
+                    <CheckBox x:ConnectionId='14' Grid.Column="1" x:Name="check_EveryWeek"                                 >
                         <TextBlock Text="EveryWeek"></TextBlock>
                     </CheckBox>
 
-                    <CheckBox x:ConnectionId='14' Grid.Column="2" x:Name="check_EveryMonth"                                 >
+                    <CheckBox x:ConnectionId='15' Grid.Column="2" x:Name="check_EveryMonth"                                 >
                         <TextBlock Text="EveryMonth"></TextBlock>
                     </CheckBox>
                 </Grid>
@@ -143,22 +143,22 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <CheckBox x:ConnectionId='9' Grid.Column="0" x:Name="check_FileInput"                                  >
+                        <CheckBox x:ConnectionId='10' Grid.Column="0" x:Name="check_FileInput"                                  >
                             <TextBlock Text="Using File Input"></TextBlock>
                         </CheckBox>
 
-                        <CheckBox x:ConnectionId='10' Grid.Column="1" x:Name="check_Deviceinput"                                   Margin="10, 0">
+                        <CheckBox x:ConnectionId='11' Grid.Column="1" x:Name="check_Deviceinput"                                   Margin="10, 0">
                             <TextBlock Text="Using Device Input"></TextBlock>
                         </CheckBox>
 
-                        <CheckBox x:ConnectionId='11' Grid.Column="2" x:Name="check_PlayListInput"                                  >
+                        <CheckBox x:ConnectionId='12' Grid.Column="2" x:Name="check_PlayListInput"                                  >
                             <TextBlock Text="Using Playlist Input"></TextBlock>
                         </CheckBox>
                     </Grid>
 
-                    <TextBlock x:ConnectionId='7' x:Name="textbox_FilePath" Text="..." Margin="0,10" Grid.Row="1"></TextBlock>
+                    <TextBlock x:ConnectionId='8' x:Name="textbox_FilePath" Text="..." Margin="0,10" Grid.Row="1"></TextBlock>
                     <TextBlock Text="Input Device" Margin="0,10" Grid.Row="2"></TextBlock>
-                    <ListView x:ConnectionId='8' x:Name="InputDevicesList"  Height="200"  BorderBrush="#FFC9C9C9" BorderThickness="0,1" Padding="10" Grid.Row="3"
+                    <ListView x:ConnectionId='9' x:Name="InputDevicesList"  Height="200"  BorderBrush="#FFC9C9C9" BorderThickness="0,1" Padding="10" Grid.Row="3"
                           IsItemClickEnabled="True"                                  />
                 </Grid>
 
@@ -169,7 +169,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Text="Output Device" Margin="0,10" Grid.Row="0"></TextBlock>
-                    <ListView x:ConnectionId='6' x:Name="OutputDevicesList"  Height="200"  BorderBrush="#FFC9C9C9" BorderThickness="0,1" Padding="10" Grid.Row="1"
+                    <ListView x:ConnectionId='7' x:Name="OutputDevicesList"  Height="200"  BorderBrush="#FFC9C9C9" BorderThickness="0,1" Padding="10" Grid.Row="1"
                           IsItemClickEnabled="True"                                  />
                 </Grid>
 
@@ -177,13 +177,16 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button x:ConnectionId='4'                      Margin="20" Grid.Column="0" HorizontalAlignment="Center" Content="Finish">
-
+                    <Button x:ConnectionId='4'                      Margin="20" Grid.Column="0" HorizontalAlignment="Center" Content="GoBack">
                     </Button>
 
-                    <Button x:ConnectionId='5'                        Margin="20" Grid.Column="1" HorizontalAlignment="Center" Background="#B2EA0F0F">
+                    <Button x:ConnectionId='5'                        Margin="20" Grid.Column="1" HorizontalAlignment="Center" Content="Finish">
+                    </Button>
+
+                    <Button x:ConnectionId='6'                        Margin="20" Grid.Column="2" HorizontalAlignment="Center" Background="#B2EA0F0F">
                         <TextBlock Text="Delete" Foreground="White"></TextBlock>
                     </Button>
                 </Grid>

@@ -45,11 +45,11 @@ PlayerTab::PlayerTab()
 	InitializeComponent();
 	
 
-	/*concurrency::create_task(DeviceInformation::FindAllAsync(MediaDevice::GetAudioCaptureSelector())).then(
+	concurrency::create_task(DeviceInformation::FindAllAsync(MediaDevice::GetAudioCaptureSelector())).then(
 		[this ](DeviceInformationCollection^ devices) {
 
 		for (auto d : devices) {
-			input_listbox->Items->Append(d->Name);
+			DeviceList_in.push_back(d->Name);
 		}
 		
 		return DeviceInformation::FindAllAsync(MediaDevice::GetAudioRenderSelector());
@@ -58,9 +58,9 @@ PlayerTab::PlayerTab()
 		auto devices = task.get();
 
 		for (auto d : devices) {
-			output_listbox->Items->Append(d->Name);
+			DeviceList_out.push_back(d->Name);
 		}
-	});*/
+	});
 	
 
 	
@@ -189,6 +189,18 @@ concurrency::task<void> BrodcastScher::PlayerTab::CreateUpdateTask()
 							textbox_startTime->Text = st->wHour + " : " + st->wMinute + " :  " + st->wSecond;
 							textbox_endTime->Text = et->wHour + " : " + et->wMinute + " :  " + et->wSecond;
 
+							switch (least_started_event->type) {
+							case InputType::AudioFile:
+								textbox_inputType->Text = "File [" + ref new Platform::String(least_started_event->input_file_path.c_str()) + "]";
+								break;
+							case InputType::PlayList:
+								textbox_inputType->Text = "PlayList [" + ref new Platform::String(least_started_event->input_playlist_path.c_str()) + "]";
+								break;
+							default:
+								textbox_inputType->Text = DeviceList_in[least_started_event->input_dev_index];
+							}
+
+							textbox_outputType->Text = DeviceList_out[least_started_event->output_dev_index];
 						}));
 
 
@@ -209,6 +221,9 @@ concurrency::task<void> BrodcastScher::PlayerTab::CreateUpdateTask()
 							case InputType::AudioFile:
 								rely = new AudioRely(_event->input_file_path, _event->output_dev_index, auto_start, false);
 								break;
+
+							case InputType::PlayList:
+								rely = new AudioRely(_event->input_playlist_path, _event->output_dev_index, auto_start, true);
 							}
 							 
 							onGoingRely.push_back(rely);
@@ -248,15 +263,9 @@ concurrency::task<void> BrodcastScher::PlayerTab::CreateUpdateTask()
 
 void BrodcastScher::PlayerTab::btn_deviceSet_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
-
-}
-
-
-void BrodcastScher::PlayerTab::btn_stop_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
-{
 	auto box = (Button^)sender;
 
-	if (box->Content->ToString() == "Stop") {
+	if (box->Content->ToString() == "Pause") {
 		auto_start = false;
 		for (auto reply_router : onGoingRely) {
 			reply_router->StopStreaming();
@@ -270,6 +279,28 @@ void BrodcastScher::PlayerTab::btn_stop_Click(Platform::Object^ sender, Windows:
 			reply_router->StartStreaming();
 		}
 
-		box->Content = "Stop";
+		box->Content = "Pause";
 	}
+}
+
+
+void BrodcastScher::PlayerTab::btn_stop_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	for (auto rely : onGoingRely)
+		rely->StopStreaming();
+
+	while (onGoingRely.size() > 0) {
+		delete onGoingRely[0];
+		onGoingRely.erase(onGoingRely.begin());
+	}
+		
+	
+	auto_start = false;
+
+	while (event_queue.size() > 0) {
+		delete event_queue[0];
+		event_queue.erase(event_queue.begin());
+	}
+
+	btn_start->IsEnabled = true;
 }

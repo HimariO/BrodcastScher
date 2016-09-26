@@ -69,7 +69,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Input Type: " Grid.Column="0" FontSize="18"></TextBlock>
-                    <TextBlock Text="Device" Grid.Column="1" Foreground="#FF1C98FF" Margin="10,0,0,0" FontSize="18"></TextBlock>
+                    <TextBlock x:Name="textbox_inputType" Text="Device" Grid.Column="1" Foreground="#FF1C98FF" Margin="10,0,0,0" FontSize="18"></TextBlock>
                 </Grid>
 
                 <Grid Grid.Row="1" Margin="10">
@@ -77,8 +77,8 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Output Type: " Grid.Column="0" FontSize="18"></TextBlock>
-                    <TextBlock Text="Device" Grid.Column="1" Foreground="#FF1C98FF" Margin="10,0,0,0" FontSize="18"></TextBlock>
+                    <TextBlock Text="Output: " Grid.Column="0" FontSize="18"></TextBlock>
+                    <TextBlock x:Name="textbox_outputType" Text="Device" Grid.Column="1" Foreground="#FF1C98FF" Margin="10,0,0,0" FontSize="18"></TextBlock>
                 </Grid>
 
                 <Grid Grid.Row="2" Margin="10">
@@ -176,7 +176,7 @@
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <!--<ColumnDefinition Width="Auto"/>-->
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
@@ -188,8 +188,10 @@
                     <TextBlock Text="Start"></TextBlock>
                 </Button>
 
-                <Button x:Name="btn_stop" Grid.Column="1" Margin="5" HorizontalAlignment="Left" Click="btn_stop_Click" Content="Stop">
+                <Button x:Name="btn_pause" Grid.Column="1" Margin="5"  Click="btn_deviceSet_Click" Content="Pause">
+                </Button>
 
+                <Button x:Name="btn_stop" Grid.Column="2" Margin="5" HorizontalAlignment="Left" Click="btn_stop_Click" Content="Stop">
                 </Button>
             
             </Grid>

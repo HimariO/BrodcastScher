@@ -76,6 +76,8 @@ BrodcastScher::DayEventDetail::DayEventDetail(json JSON)
 	repeat_type = JSON["repeat_type"];
 
 	int height = (end->wHour * 60 + end->wMinute) - (start->wHour * 60 + start->wMinute);
+	height = height < 0 ? 0 : height;
+
 	auto time_tag = std::to_string(start->wHour) + ":" + std::to_string(start->wMinute) + " ~ " + std::to_string(end->wHour) + ":" + std::to_string(end->wMinute);
 	UIobject = ref new DayEvent(Tool::sToS(event_name), Tool::sToS(time_tag), height, Tool::sToS(color_opts[counter_color++%6]));
 	//UIobject->setParent(this);

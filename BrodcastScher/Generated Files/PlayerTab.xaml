@@ -25,32 +25,32 @@
 
             <!--<ListBox x:Name="input_listbox" Grid.Column="0" Margin="5"></ListBox>
             <ListBox x:Name="output_listbox" Grid.Column="1" Margin="5"></ListBox>-->
-            <StackPanel x:ConnectionId='4' x:Name="equalizerEffectContainer" Margin="20" Padding="5" BorderThickness="1,0" BorderBrush="#FF2CB2FF" Grid.Column="0">
-                <ToggleSwitch x:ConnectionId='12' x:Name="eqToggle" Header="EQUALIZER EFFECT" IsOn="False"  IsEnabled="False" />
+            <StackPanel x:ConnectionId='5' x:Name="equalizerEffectContainer" Margin="20" Padding="5" BorderThickness="1,0" BorderBrush="#FF2CB2FF" Grid.Column="0">
+                <ToggleSwitch x:ConnectionId='15' x:Name="eqToggle" Header="EQUALIZER EFFECT" IsOn="False"  IsEnabled="False" />
                 <StackPanel Orientation="Horizontal">
-                    <StackPanel x:ConnectionId='13' x:Name="eq1SliderContainer" Orientation="Vertical">
-                        <Slider x:ConnectionId='29' x:Name="eq1Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="100" Minimum="0" SmallChange="5" Value="50" Height="500" IsEnabled="False" Margin="20,5"/>
-                        <TextBlock x:ConnectionId='30' x:Name="eq1SliderLabel" Text="100Hz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
+                    <StackPanel x:ConnectionId='16' x:Name="eq1SliderContainer" Orientation="Vertical">
+                        <Slider x:ConnectionId='32' x:Name="eq1Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="100" Minimum="0" SmallChange="5" Value="50" Height="500" IsEnabled="False" Margin="20,5"/>
+                        <TextBlock x:ConnectionId='33' x:Name="eq1SliderLabel" Text="100Hz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
                     </StackPanel>
-                    <StackPanel x:ConnectionId='14' x:Name="eq2SliderContainer" Orientation="Vertical">
-                        <Slider x:ConnectionId='27' x:Name="eq2Slider" Orientation="Vertical" HorizontalAlignment="Center" Maximum="100" Minimum="0" SmallChange="5" Value="20" Height="500" IsEnabled="False" Margin="20,5"/>
-                        <TextBlock x:ConnectionId='28' x:Name="eq2SliderLabel" Text="900Hz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
+                    <StackPanel x:ConnectionId='17' x:Name="eq2SliderContainer" Orientation="Vertical">
+                        <Slider x:ConnectionId='30' x:Name="eq2Slider" Orientation="Vertical" HorizontalAlignment="Center" Maximum="100" Minimum="0" SmallChange="5" Value="20" Height="500" IsEnabled="False" Margin="20,5"/>
+                        <TextBlock x:ConnectionId='31' x:Name="eq2SliderLabel" Text="900Hz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
                     </StackPanel>
-                    <StackPanel x:ConnectionId='15' x:Name="eq3SliderContainer" Orientation="Vertical">
-                        <Slider x:ConnectionId='25' x:Name="eq3Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="100" Minimum="0" SmallChange="5" Value="70" Height="500" IsEnabled="False" Margin="20,5"/>
-                        <TextBlock x:ConnectionId='26' x:Name="eq3SliderLabel" Text="5kHz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
+                    <StackPanel x:ConnectionId='18' x:Name="eq3SliderContainer" Orientation="Vertical">
+                        <Slider x:ConnectionId='28' x:Name="eq3Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="100" Minimum="0" SmallChange="5" Value="70" Height="500" IsEnabled="False" Margin="20,5"/>
+                        <TextBlock x:ConnectionId='29' x:Name="eq3SliderLabel" Text="5kHz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
                     </StackPanel>
-                    <StackPanel x:ConnectionId='16' x:Name="eq4SliderContainer" Orientation="Vertical">
-                        <Slider x:ConnectionId='23' x:Name="eq4Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="100" Minimum="0" SmallChange="5" Value="30" Height="500" IsEnabled="False" Margin="20,5"/>
-                        <TextBlock x:ConnectionId='24' x:Name="eq4SliderLabel" Text="12kHz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
+                    <StackPanel x:ConnectionId='19' x:Name="eq4SliderContainer" Orientation="Vertical">
+                        <Slider x:ConnectionId='26' x:Name="eq4Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="100" Minimum="0" SmallChange="5" Value="30" Height="500" IsEnabled="False" Margin="20,5"/>
+                        <TextBlock x:ConnectionId='27' x:Name="eq4SliderLabel" Text="12kHz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
                     </StackPanel>
-                    <StackPanel x:ConnectionId='17' x:Name="eq5SliderContainer" Orientation="Vertical">
-                        <Slider x:ConnectionId='21' x:Name="eq5Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="100" Minimum="0" SmallChange="5" Value="30" Height="500" IsEnabled="False" Margin="20,5"/>
-                        <TextBlock x:ConnectionId='22' x:Name="eq5SliderLabel" Text="16kHz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
+                    <StackPanel x:ConnectionId='20' x:Name="eq5SliderContainer" Orientation="Vertical">
+                        <Slider x:ConnectionId='24' x:Name="eq5Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="100" Minimum="0" SmallChange="5" Value="30" Height="500" IsEnabled="False" Margin="20,5"/>
+                        <TextBlock x:ConnectionId='25' x:Name="eq5SliderLabel" Text="16kHz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
                     </StackPanel>
-                    <StackPanel x:ConnectionId='18' x:Name="eq6SliderContainer" Orientation="Vertical">
-                        <Slider x:ConnectionId='19' x:Name="eq6Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="100" Minimum="0" SmallChange="5" Value="30" Height="500" IsEnabled="False" Margin="20,5"/>
-                        <TextBlock x:ConnectionId='20' x:Name="eq6SliderLabel" Text="22kHz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
+                    <StackPanel x:ConnectionId='21' x:Name="eq6SliderContainer" Orientation="Vertical">
+                        <Slider x:ConnectionId='22' x:Name="eq6Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="100" Minimum="0" SmallChange="5" Value="30" Height="500" IsEnabled="False" Margin="20,5"/>
+                        <TextBlock x:ConnectionId='23' x:Name="eq6SliderLabel" Text="22kHz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
@@ -69,7 +69,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Input Type: " Grid.Column="0" FontSize="18"></TextBlock>
-                    <TextBlock Text="Device" Grid.Column="1" Foreground="#FF1C98FF" Margin="10,0,0,0" FontSize="18"></TextBlock>
+                    <TextBlock x:ConnectionId='14' x:Name="textbox_inputType" Text="Device" Grid.Column="1" Foreground="#FF1C98FF" Margin="10,0,0,0" FontSize="18"></TextBlock>
                 </Grid>
 
                 <Grid Grid.Row="1" Margin="10">
@@ -77,8 +77,8 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Output Type: " Grid.Column="0" FontSize="18"></TextBlock>
-                    <TextBlock Text="Device" Grid.Column="1" Foreground="#FF1C98FF" Margin="10,0,0,0" FontSize="18"></TextBlock>
+                    <TextBlock Text="Output: " Grid.Column="0" FontSize="18"></TextBlock>
+                    <TextBlock x:ConnectionId='13' x:Name="textbox_outputType" Text="Device" Grid.Column="1" Foreground="#FF1C98FF" Margin="10,0,0,0" FontSize="18"></TextBlock>
                 </Grid>
 
                 <Grid Grid.Row="2" Margin="10">
@@ -87,7 +87,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Starting Time: " Grid.Column="0" FontSize="18"></TextBlock>
-                    <TextBlock x:ConnectionId='11' x:Name="textbox_startTime" Text="00:00" Grid.Column="1" Foreground="#FF1C98FF" Margin="10,0,0,0" FontSize="18"></TextBlock>
+                    <TextBlock x:ConnectionId='12' x:Name="textbox_startTime" Text="00:00" Grid.Column="1" Foreground="#FF1C98FF" Margin="10,0,0,0" FontSize="18"></TextBlock>
                 </Grid>
 
                 <Grid Grid.Row="3" Margin="10">
@@ -96,7 +96,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Ending Time: " Grid.Column="0" FontSize="18"></TextBlock>
-                    <TextBlock x:ConnectionId='10' x:Name="textbox_endTime"  Text="00:00" Grid.Column="1" Foreground="#FF1C98FF" FontSize="18" Margin="10,0,0,0"></TextBlock>
+                    <TextBlock x:ConnectionId='11' x:Name="textbox_endTime"  Text="00:00" Grid.Column="1" Foreground="#FF1C98FF" FontSize="18" Margin="10,0,0,0"></TextBlock>
                 </Grid>
             </Grid>
 
@@ -115,7 +115,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Current Time" Grid.Row="0" FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock x:ConnectionId='9' x:Name="textbox_currentTime" Text="00:00:00" Grid.Row="1" Foreground="#FF1C98FF" Margin="10,0,0,0" FontSize="25" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock x:ConnectionId='10' x:Name="textbox_currentTime" Text="00:00:00" Grid.Row="1" Foreground="#FF1C98FF" Margin="10,0,0,0" FontSize="25" HorizontalAlignment="Center"></TextBlock>
                 </Grid>
 
                 <Grid Grid.Row="1" Margin="10">
@@ -143,18 +143,18 @@
                     </Grid.RowDefinitions>
                     <TextBlock Text="Job Remain (Today)" Grid.Row="0" FontSize="18" HorizontalAlignment="Center"></TextBlock>
                     
-                    <ListView x:ConnectionId='5' x:Name="remain_job_list" HorizontalAlignment="Stretch" Grid.Row="1">
+                    <ListView x:ConnectionId='6' x:Name="remain_job_list" HorizontalAlignment="Stretch" Grid.Row="1">
                         <ListView.ItemTemplate>
                             <DataTemplate                            >
-                                <Grid x:ConnectionId='6' Padding="6"                            >
+                                <Grid x:ConnectionId='7' Padding="6"                            >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock x:ConnectionId='7' Grid.Row="0"                    TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock x:ConnectionId='8' Grid.Row="0"                    TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                                     <Grid x:Name="detailGrid" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.Row="1">
-                                        <TextBlock x:ConnectionId='8'                      TextWrapping="Wrap"/>
+                                        <TextBlock x:ConnectionId='9'                      TextWrapping="Wrap"/>
                                     </Grid>
                                 </Grid>
                             </DataTemplate>
@@ -176,7 +176,7 @@
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <!--<ColumnDefinition Width="Auto"/>-->
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
@@ -188,8 +188,10 @@
                     <TextBlock Text="Start"></TextBlock>
                 </Button>
 
-                <Button x:ConnectionId='3' x:Name="btn_stop" Grid.Column="1" Margin="5" HorizontalAlignment="Left"                        Content="Stop">
+                <Button x:ConnectionId='3' x:Name="btn_pause" Grid.Column="1" Margin="5"                              Content="Pause">
+                </Button>
 
+                <Button x:ConnectionId='4' x:Name="btn_stop" Grid.Column="2" Margin="5" HorizontalAlignment="Left"                        Content="Stop">
                 </Button>
             
             </Grid>

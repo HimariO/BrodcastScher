@@ -66,7 +66,10 @@ public:
 				}
 				
 			}
-			catch (...) { concurrency::cancel_current_task(); }
+			catch (Platform::COMException^ e) {
+				auto debug = e->Message;
+				concurrency::cancel_current_task(); 
+			}
 		})
 		.then([this, isPlaylist]() { 
 			if (!isPlaylist)
@@ -81,7 +84,13 @@ public:
 	}
 
 	~AudioRely() {
-
+		
+		aGraph = nullptr;
+		inputNode = nullptr;
+		outputNode = nullptr;
+		fileNode = nullptr;
+		AudioPlaylist = nullptr;
+		AudioFile = nullptr;
 	}
 
 
@@ -294,8 +303,10 @@ private:
 	void GetPlaylistFile() {
 
 		++PlaylistCounter;
-		if (PlaylistCounter >= AudioPlaylist->Files->Size)
+		if (PlaylistCounter >= AudioPlaylist->Files->Size) {
+			AudioPlaylist = nullptr;
 			return;
+		}
 
 		AudioFile = AudioPlaylist->Files->GetAt(PlaylistCounter);
 
