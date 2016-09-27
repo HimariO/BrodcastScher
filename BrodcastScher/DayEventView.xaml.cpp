@@ -119,14 +119,7 @@ void BrodcastScher::DayEventView::DevicesList_ItemClick(Platform::Object^ sender
 
 void BrodcastScher::DayEventView::startTimePicker_TimeChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::TimePickerValueChangedEventArgs^ e)
 {
-	int64 selectedTimeInSeconds = e->NewTime.Duration / 10000000;
-	int64 hours = selectedTimeInSeconds / 3600;
-	int64 minutes = (selectedTimeInSeconds % 3600) / 60;
 
-	if (EventSelected != nullptr) {
-		EventSelected->start->wHour = hours;
-		EventSelected->start->wMinute = minutes;
-	}
 }
 
 
@@ -153,35 +146,73 @@ void BrodcastScher::DayEventView::EnumerateAudioDevicesAsync()
 void BrodcastScher::DayEventView::startTimeSec_TextChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::TextChangedEventArgs^ e)
 {
 	auto box = (TextBox^)sender;
+	auto name = box->Name;
 	int value = _wtoi(box->Text->Data());
 
-	if (value > 59)
-		value = 59;
-	else if (value < 0)
-		value = 0;
+	if (name == "startTimeS") {
+		if (value > 59)
+			value = 59;
+		else if (value < 0)
+			value = 0;
 
-	EventSelected->start->wSecond = value;
+		EventSelected->start->wSecond = value;
+	}else if (name == "startTimeM") {
+		if (value > 59)
+			value = 59;
+		else if (value < 0)
+			value = 0;
+
+		EventSelected->start->wMinute = value;
+	}else if (name == "startTimeH") {
+		if (value > 24)
+			value = 24;
+		else if (value < 1)
+			value = 1;
+
+		EventSelected->start->wHour = value;
+	}
+	EventSelected->setStartTime(EventSelected->start->wHour, EventSelected->start->wMinute, EventSelected->start->wSecond);
 }
 
 
 void BrodcastScher::DayEventView::endTimeSec_TextChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::TextChangedEventArgs^ e)
 {
 	auto box = (TextBox^)sender;
-	auto value = _wtoi(box->Text->Data());
+	auto name = box->Name;
+	int value = _wtoi(box->Text->Data());
 
-	if (value > 59)
-		value = 59;
-	else if (value < 0)
-		value = 0;
+	if (name == "endTimeS") {
+		if (value > 59)
+			value = 59;
+		else if (value < 0)
+			value = 0;
 
-	EventSelected->end->wSecond = value;
+		EventSelected->end->wSecond = value;
+	}
+	else if (name == "endTimeM") {
+		if (value > 59)
+			value = 59;
+		else if (value < 0)
+			value = 0;
+
+		EventSelected->end->wMinute = value;
+	}
+	else if (name == "endTimeH") {
+		if (value > 24)
+			value = 24;
+		else if (value < 1)
+			value = 1;
+
+		EventSelected->end->wHour = value;
+	}
+
+	EventSelected->setEndTime(EventSelected->end->wHour, EventSelected->end->wMinute, EventSelected->end->wSecond);
 }
 
 
 void BrodcastScher::DayEventView::OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs ^ e)
 {
-	startTimePicker->IsEnabled = false;
-	endTimePicker->IsEnabled = false;
+	TimeBoxSwitch(false);
 
 	DateTime para = (DateTime)e->Parameter;
 	_calendar->SetDateTime(para);
@@ -256,6 +287,7 @@ void BrodcastScher::DayEventView::UpdateUIEventList()
 			theList->Items->Append(ref new DayEvent("EMPTY", "", EmptyH, "#FFF4F4F4"));
 		}
 		pre_end_time = data.end->wHour * 60 + data.end->wMinute;
+		data.UIobject->itemH = data.UIobject->itemH < 10 ? 10 : data.UIobject->itemH;
 		theList->Items->Append(data.UIobject);
 	}
 
@@ -268,33 +300,25 @@ void BrodcastScher::DayEventView::UpdateUIEventList()
 void BrodcastScher::DayEventView::UpdateDetailView()
 {
 	if (EventSelected == nullptr) {
-		startTimePicker->IsEnabled = false;
-		endTimePicker->IsEnabled = false;
+		TimeBoxSwitch(false);
 		return;
 	}
 	else {
-		startTimePicker->IsEnabled = true;
-		endTimePicker->IsEnabled = true;
+		TimeBoxSwitch(true);
 	}
 	
 	textbox_eventName->Text = EventSelected->UIobject->In;
 
-	startTimeSec->Text = EventSelected->start->wSecond + "";
-	endTimeSec->Text = EventSelected->end->wSecond + "";
+	startTimeS->Text = EventSelected->start->wSecond + "";
+	startTimeM->Text = EventSelected->start->wMinute + "";
+	startTimeH->Text = EventSelected->start->wHour + "";
+	endTimeS->Text = EventSelected->end->wSecond + "";
+	endTimeM->Text = EventSelected->end->wMinute + "";
+	endTimeH->Text = EventSelected->end->wHour + "";;
 
 	// update timepicker
-	int64 h = EventSelected->start->wHour * 3600;
-	int64 m = EventSelected->start->wMinute * 60;
-	
-	TimeSpan tp;
-	tp.Duration = (h + m) * 10000000;
-	startTimePicker->Time = tp;
 
-	h = EventSelected->end->wHour * 3600;
-	m = EventSelected->end->wMinute * 60;
 
-	tp.Duration = (h + m) * 10000000;
-	endTimePicker->Time = tp;
 
 	// update device list
 	InputDevicesList->SelectedIndex = EventSelected->input_dev_index;
@@ -304,17 +328,17 @@ void BrodcastScher::DayEventView::UpdateDetailView()
 	case 1:
 		check_EveryDay->IsChecked = true;
 		check_EveryWeek->IsChecked = false;
-		check_EveryMonth->IsChecked = false;
+		
 		break;
 	case 2:
 		check_EveryDay->IsChecked = false;
 		check_EveryWeek->IsChecked = true;
-		check_EveryMonth->IsChecked = false;
+		
 		break;
 	default:
 		check_EveryDay->IsChecked = false;
 		check_EveryWeek->IsChecked = false;
-		check_EveryMonth->IsChecked = false;
+
 	}
 
 	switch (EventSelected->type) {
@@ -325,6 +349,9 @@ void BrodcastScher::DayEventView::UpdateDetailView()
 		check_FileInput->IsChecked = false;
 		check_PlayListInput->IsChecked = false;
 		textbox_FilePath->Text = "...";
+
+		contentTag_PGM->IsEnabled = false;
+		contentTag_AD->IsEnabled = false;
 		break;
 	case InputType::AudioFile:
 		input_check_setby_fucntion = true;
@@ -332,6 +359,10 @@ void BrodcastScher::DayEventView::UpdateDetailView()
 		check_Deviceinput->IsChecked = false;
 		check_FileInput->IsChecked = true;
 		check_PlayListInput->IsChecked = false;
+
+		contentTag_PGM->IsEnabled = true;
+		contentTag_AD->IsEnabled = true;
+
 		textbox_FilePath->Text = ref new Platform::String(EventSelected->input_file_path.c_str());
 		break;
 	case InputType::PlayList:
@@ -340,10 +371,27 @@ void BrodcastScher::DayEventView::UpdateDetailView()
 		check_Deviceinput->IsChecked = false;
 		check_FileInput->IsChecked = false;
 		check_PlayListInput->IsChecked = true;
+
+		contentTag_PGM->IsEnabled = true;
+		contentTag_AD->IsEnabled = true;
+
 		textbox_FilePath->Text = ref new Platform::String(EventSelected->input_playlist_path.c_str());
 	}
 
-	
+	switch (EventSelected->content_tag)
+	{
+	case ContentTag::PGM:
+		contentTag_PGM->IsChecked = true;
+		contentTag_AD->IsChecked = false;
+		break;
+
+	case ContentTag::AD:
+		contentTag_PGM->IsChecked = false;
+		contentTag_AD->IsChecked = true;
+		break;
+	default:
+		break;
+	}
 }
 
 
@@ -371,13 +419,13 @@ void BrodcastScher::DayEventView::check_EveryDay_Checked(Platform::Object^ sende
 
 	if (Name == "check_EveryDay") {
 		check_EveryWeek->IsChecked = false;
-		check_EveryMonth->IsChecked = false;
+		
 		if(EventSelected != nullptr)
 			EventSelected->repeat_type = 1;
 	}
 	else if (Name == "check_EveryWeek") {
 		check_EveryDay->IsChecked = false;
-		check_EveryMonth->IsChecked = false;
+		
 		if (EventSelected != nullptr)
 			EventSelected->repeat_type = 2;
 	}
@@ -448,7 +496,22 @@ void BrodcastScher::DayEventView::MenuFlyoutItem_Click(Platform::Object^ sender,
 		UpdateUIEventList();
 	}
 	else if (tex == "Delete") {
+		copyedDetail.clear();
 
+		for (size_t i = 0; i < theList->SelectedItems->Size; i++)
+		{
+			for (size_t j = 0; j < EventList.size(); j++)
+			{
+				auto temp = (DayEvent^)theList->SelectedItems->GetAt(i);
+				if (EventList[j].UIobject == temp) {
+					EventList.erase(EventList.begin() + j);
+					break;
+				}
+			}
+		}
+
+		theList->SelectedItems->Clear();
+		UpdateUIEventList();
 	}
 }
 
@@ -493,6 +556,8 @@ void BrodcastScher::DayEventView::check_FileInput_Checked(Platform::Object^ send
 		check_PlayListInput->IsChecked = false;
 		
 		InputDevicesList->IsEnabled = false;
+		contentTag_PGM->IsEnabled = true;
+		contentTag_AD->IsEnabled = true;
 
 		if (EventSelected != nullptr)
 			EventSelected->type = InputType::AudioFile;
@@ -515,9 +580,7 @@ void BrodcastScher::DayEventView::check_FileInput_Checked(Platform::Object^ send
 			try {
 				FileProperties::MusicProperties^ m_property = _task.get();
 				auto times = m_property->Duration;
-				times.Duration = startTimePicker->Time.Duration + times.Duration;
-
-				endTimePicker->Time = times;
+			
 			}
 			catch (Platform::COMException^ e) {
 				auto debug = e->Message;
@@ -530,6 +593,8 @@ void BrodcastScher::DayEventView::check_FileInput_Checked(Platform::Object^ send
 		check_PlayListInput->IsChecked = false;
 
 		InputDevicesList->IsEnabled = true;
+		contentTag_PGM->IsEnabled = false;
+		contentTag_AD->IsEnabled = false;
 
 		if (EventSelected != nullptr)
 			EventSelected->type = InputType::InputDevice;
@@ -539,6 +604,8 @@ void BrodcastScher::DayEventView::check_FileInput_Checked(Platform::Object^ send
 		check_Deviceinput->IsChecked = false;
 
 		InputDevicesList->IsEnabled = false;
+		contentTag_PGM->IsEnabled = true;
+		contentTag_AD->IsEnabled = true;
 
 		if (EventSelected != nullptr)
 			EventSelected->type = InputType::PlayList;
@@ -563,5 +630,38 @@ void BrodcastScher::DayEventView::check_FileInput_Checked(Platform::Object^ send
 
 void BrodcastScher::DayEventView::Button_Click_2(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
+	if (EventSelected != nullptr) {
+		int S = EventSelected->start->wHour * 60 + EventSelected->start->wMinute;
+		int E = EventSelected->end->wHour * 60 + EventSelected->end->wMinute;
+
+		EventSelected->UIobject->itemH = (E - S) > 10 ? (E - S) : 10;
+	}
 	UpdateUIEventList();
+}
+
+
+void BrodcastScher::DayEventView::contentTag_PGM_Checked(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	auto Name = ((CheckBox^)sender)->Name;
+
+	if (EventSelected != nullptr) {
+		if (Name == "contentTag_PGM") {
+			contentTag_AD->IsChecked = false;
+			EventSelected->content_tag = ContentTag::PGM;
+		}
+		else if (Name == "contentTag_AD") {
+			contentTag_PGM->IsChecked = false;
+			EventSelected->content_tag = ContentTag::AD;
+		}
+	}
+}
+
+void BrodcastScher::DayEventView::TimeBoxSwitch(bool b)
+{
+	startTimeH->IsEnabled = b;
+	endTimeH->IsEnabled = b;
+	startTimeM->IsEnabled = b;
+	endTimeM->IsEnabled = b;
+	startTimeS->IsEnabled = b;
+	endTimeS->IsEnabled = b;
 }

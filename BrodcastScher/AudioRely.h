@@ -33,6 +33,9 @@ public:
 		})
 		.then([this]() { initGraph().wait(); })
 		.then([this, start_after_finish]() { 
+			CreateEqEffect();
+			CreateLimiterEffect();
+
 			if (start_after_finish)
 				StartStreaming(); 
 		});
@@ -78,6 +81,9 @@ public:
 				initGraphWithPlayList().wait();
 		})
 		.then([this, start_after_finish]() {
+			CreateEqEffect();
+			CreateLimiterEffect();
+
 			if (start_after_finish)
 				StartStreaming();
 		});
@@ -112,6 +118,92 @@ public:
 	}
 
 
+	bool EnableEffects(int index) {
+		if (EQeffect == nullptr || LimiterEffect == nullptr)
+			return false;
+
+		if (inputNode != nullptr) {
+			switch (index) {
+			case 1:
+				inputNode->EnableEffectsByDefinition(LimiterEffect);
+				break;
+			case 2:
+				inputNode->EnableEffectsByDefinition(EQeffect);
+				break;
+			}
+		}
+
+		if (fileNode != nullptr) {
+			switch (index) {
+			case 1:
+				fileNode->EnableEffectsByDefinition(LimiterEffect);
+				break;
+			case 2:
+				fileNode->EnableEffectsByDefinition(EQeffect);
+				break;
+			}
+		}
+
+		return true;
+	}
+
+
+	bool DisableEffects(int index) {
+		if (EQeffect == nullptr || LimiterEffect == nullptr)
+			return false;
+
+		if (inputNode != nullptr) {
+			switch (index) {
+			case 1:
+				inputNode->DisableEffectsByDefinition(LimiterEffect);
+				break;
+			case 2:
+				inputNode->DisableEffectsByDefinition(EQeffect);
+				break;
+			}
+		}
+
+		if (fileNode != nullptr) {
+			switch (index) {
+			case 1:
+				fileNode->DisableEffectsByDefinition(LimiterEffect);
+				break;
+			case 2:
+				fileNode->DisableEffectsByDefinition(EQeffect);
+				break;
+			}
+		}
+
+		return true;
+	}
+
+
+	void SetEffectValue(unsigned int index, double value) {
+		switch (index) {
+		case 0: // EQ Bands_0
+			if(EQeffect != nullptr)
+				EQeffect->Bands->GetAt(0)->Gain = value;
+			break;
+		case 1: // EQ Bands_1
+			if (EQeffect != nullptr)
+				EQeffect->Bands->GetAt(1)->Gain = value;
+			break;
+		case 2: // EQ Bands_2
+			if (EQeffect != nullptr)
+				EQeffect->Bands->GetAt(2)->Gain = value;
+			break;
+		case 3: // EQ Bands_3
+			if (EQeffect != nullptr)
+				EQeffect->Bands->GetAt(3)->Gain = value;
+			break;
+		case 4: // Limiter Loudness
+			if (LimiterEffect!= nullptr)
+				LimiterEffect->Loudness = value;
+			break;
+		}
+	}
+
+
 private:
 	AudioGraph^ aGraph= nullptr;
 
@@ -126,6 +218,9 @@ private:
 	StorageFile^ AudioFile;
 	Playlist^ AudioPlaylist;
 	unsigned int PlaylistCounter = 0;
+
+	EqualizerEffectDefinition^ EQeffect;
+	LimiterEffectDefinition^ LimiterEffect;
 
 	concurrency::task<void> initGraphWithPlayList() {
 		AudioGraphSettings^ graph_setting = ref new AudioGraphSettings(AudioRenderCategory::Media);
@@ -181,7 +276,7 @@ private:
 
 				fileNode->FileCompleted += ref new Windows::Foundation::TypedEventHandler<Windows::Media::Audio::AudioFileInputNode ^, Platform::Object ^>(addNewFile);
 			}
-			);
+			).wait();
 		} //lambda end;
 		); //create_task end;
 	} // fucntion end;
@@ -235,7 +330,7 @@ private:
 					[this]() {
 						fileNode->AddOutgoingConnection(outputNode);
 					}
-				);
+				).wait();
 			} //lambda end;
 		); //create_task end;
 	} // fucntion end;
@@ -294,9 +389,8 @@ private:
 				[this]() {
 				inputNode->AddOutgoingConnection(outputNode);
 			}
-			);
-		}
-		); //create_task end;
+			).wait();
+		}); //create_task end;
 	} // fucntion end;
 
 
@@ -340,5 +434,53 @@ private:
 	
 		
 	} // GetPlaylistFile end.
+
+
+	void CreateEqEffect() {
+		EQeffect = ref new EqualizerEffectDefinition(aGraph);
+		
+		EQeffect->Bands->GetAt(0)->FrequencyCenter = 100.0;
+		EQeffect->Bands->GetAt(0)->Gain = 4.033;
+		EQeffect->Bands->GetAt(0)->Bandwidth = 1.5;
+
+		EQeffect->Bands->GetAt(1)->FrequencyCenter = 900.0;
+		EQeffect->Bands->GetAt(1)->Gain = 1.6888;
+		EQeffect->Bands->GetAt(1)->Bandwidth = 1.5;
+
+		EQeffect->Bands->GetAt(2)->FrequencyCenter = 5000.0;
+		EQeffect->Bands->GetAt(2)->Gain = 2.4702;
+		EQeffect->Bands->GetAt(2)->Bandwidth = 1.5;
+
+		EQeffect->Bands->GetAt(3)->FrequencyCenter = 12000.0;
+		EQeffect->Bands->GetAt(3)->Gain = 5.5958;
+		EQeffect->Bands->GetAt(3)->Bandwidth = 2.0;
+
+		if (inputNode != nullptr) {
+			inputNode->EffectDefinitions->Append(EQeffect);
+			inputNode->DisableEffectsByDefinition(EQeffect);
+		}
+
+		if (fileNode != nullptr) {
+			fileNode->EffectDefinitions->Append(EQeffect);
+			fileNode->DisableEffectsByDefinition(EQeffect);
+		}
+	}
+
+
+	void CreateLimiterEffect() {
+		LimiterEffect = ref new LimiterEffectDefinition(aGraph);
+		LimiterEffect->Loudness = 1000;
+		LimiterEffect->Release = 10;
+
+		if (inputNode != nullptr) {
+			inputNode->EffectDefinitions->Append(LimiterEffect);
+			inputNode->DisableEffectsByDefinition(LimiterEffect);
+		}
+
+		if (fileNode != nullptr) {
+			fileNode->EffectDefinitions->Append(LimiterEffect);
+			fileNode->DisableEffectsByDefinition(LimiterEffect);
+		}
+	}
 
 };

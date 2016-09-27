@@ -17,8 +17,8 @@ namespace Windows {
                 ref class StackPanel;
                 ref class ListView;
                 ref class TextBlock;
-                ref class ToggleSwitch;
                 ref class Slider;
+                ref class ToggleSwitch;
             }
         }
     }
@@ -52,15 +52,11 @@ namespace BrodcastScher
         private: ::Windows::UI::Xaml::Controls::TextBlock^ textbox_startTime;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ textbox_outputType;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ textbox_inputType;
-        private: ::Windows::UI::Xaml::Controls::ToggleSwitch^ eqToggle;
         private: ::Windows::UI::Xaml::Controls::StackPanel^ eq1SliderContainer;
         private: ::Windows::UI::Xaml::Controls::StackPanel^ eq2SliderContainer;
         private: ::Windows::UI::Xaml::Controls::StackPanel^ eq3SliderContainer;
         private: ::Windows::UI::Xaml::Controls::StackPanel^ eq4SliderContainer;
         private: ::Windows::UI::Xaml::Controls::StackPanel^ eq5SliderContainer;
-        private: ::Windows::UI::Xaml::Controls::StackPanel^ eq6SliderContainer;
-        private: ::Windows::UI::Xaml::Controls::Slider^ eq6Slider;
-        private: ::Windows::UI::Xaml::Controls::TextBlock^ eq6SliderLabel;
         private: ::Windows::UI::Xaml::Controls::Slider^ eq5Slider;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ eq5SliderLabel;
         private: ::Windows::UI::Xaml::Controls::Slider^ eq4Slider;
@@ -71,6 +67,8 @@ namespace BrodcastScher
         private: ::Windows::UI::Xaml::Controls::TextBlock^ eq2SliderLabel;
         private: ::Windows::UI::Xaml::Controls::Slider^ eq1Slider;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ eq1SliderLabel;
+        private: ::Windows::UI::Xaml::Controls::ToggleSwitch^ eqToggle;
+        private: ::Windows::UI::Xaml::Controls::ToggleSwitch^ limiterToggle;
     };
 }
 

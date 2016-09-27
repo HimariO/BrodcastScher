@@ -45,7 +45,7 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate  x:DataType="data:DayEvent">
-                        <Grid Height="{x:Bind itemH }" Padding="6" Background="{x:Bind Color}" RightTapped="Grid_RightTapped">
+                        <Grid Height="{x:Bind itemH }" Padding="0" Margin="0" Background="{x:Bind Color}" RightTapped="Grid_RightTapped">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
@@ -63,8 +63,8 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Button x:Name="btn_AddEvent" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btn_AddEvent_Click">
-                <TextBlock Text="+"></TextBlock>
+            <Button x:Name="btn_AddEvent" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btn_AddEvent_Click" Background="#CC18AAD4">
+                <TextBlock Text="+" Foreground="White" FontSize="20"></TextBlock>
             </Button>
         </Grid>
         <ScrollViewer Grid.Column="1">
@@ -89,22 +89,30 @@
                 </Grid>
 
 
-                <Grid Grid.Row="1" >
+                <Grid Grid.Row="1"  Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TimePicker x:Name="startTimePicker" Header="Start time" Grid.Column="0" TimeChanged="startTimePicker_TimeChanged"/>
-                    <TextBox x:Name="startTimeSec" VerticalAlignment="Bottom" Grid.Column="1" TextChanged="startTimeSec_TextChanged"></TextBox>
+                    <TextBlock Text="Start Time" Margin="5" Grid.Column="0"></TextBlock>
+                    <TextBox x:Name="startTimeH" VerticalAlignment="Bottom" Grid.Column="1" TextChanged="startTimeSec_TextChanged"></TextBox>
+                    <TextBox x:Name="startTimeM" VerticalAlignment="Bottom" Grid.Column="2" TextChanged="startTimeSec_TextChanged"></TextBox>
+                    <TextBox x:Name="startTimeS" VerticalAlignment="Bottom" Grid.Column="3" TextChanged="startTimeSec_TextChanged"></TextBox>
                 </Grid>
 
-                <Grid Grid.Row="2" >
+                <Grid Grid.Row="2" Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TimePicker x:Name="endTimePicker" Header="End time" Grid.Column="0" TimeChanged="endTimePicker_TimeChanged"/>
-                    <TextBox x:Name="endTimeSec" VerticalAlignment="Bottom" TextChanged="endTimeSec_TextChanged" Grid.Column="1"></TextBox>
+                    <TextBlock Text="End  Time" Margin="5" Grid.Column="0"></TextBlock>
+                    <TextBox x:Name="endTimeH" VerticalAlignment="Bottom" TextChanged="endTimeSec_TextChanged" Grid.Column="1"></TextBox>
+                    <TextBox x:Name="endTimeM" VerticalAlignment="Bottom" TextChanged="endTimeSec_TextChanged" Grid.Column="2"></TextBox>
+                    <TextBox x:Name="endTimeS" VerticalAlignment="Bottom" TextChanged="endTimeSec_TextChanged" Grid.Column="3"></TextBox>
                 </Grid>
 
                 <Grid Grid.Row="3"  Margin="5,20,5,5">
@@ -122,9 +130,7 @@
                         <TextBlock Text="EveryWeek"></TextBlock>
                     </CheckBox>
 
-                    <CheckBox Grid.Column="2" x:Name="check_EveryMonth" Checked="check_EveryDay_Checked">
-                        <TextBlock Text="EveryMonth"></TextBlock>
-                    </CheckBox>
+                    
                 </Grid>
 
                 <Grid Grid.Row="4" Margin="0,20" >
@@ -133,7 +139,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
@@ -157,8 +163,25 @@
                     </Grid>
 
                     <TextBlock x:Name="textbox_FilePath" Text="..." Margin="0,10" Grid.Row="1"></TextBlock>
-                    <TextBlock Text="Input Device" Margin="0,10" Grid.Row="2"></TextBlock>
-                    <ListView x:Name="InputDevicesList"  Height="200"  BorderBrush="#FFC9C9C9" BorderThickness="0,1" Padding="10" Grid.Row="3"
+                    
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox Grid.Column="0" x:Name="contentTag_PGM" Checked="contentTag_PGM_Checked">
+                            <TextBlock Text="PGM"></TextBlock>
+                        </CheckBox>
+
+                        <CheckBox Grid.Column="1" x:Name="contentTag_AD" Checked="contentTag_PGM_Checked" Margin="10, 0">
+                            <TextBlock Text="AD"></TextBlock>
+                        </CheckBox>
+                    </Grid>
+                    
+                    <TextBlock Text="Input Device" Margin="0,10" Grid.Row="3"></TextBlock>
+                    <ListView x:Name="InputDevicesList"  Height="200"  BorderBrush="#FFC9C9C9" BorderThickness="0,1" Padding="10" Grid.Row="4"
                           IsItemClickEnabled="True" ItemClick="DevicesList_ItemClick"/>
                 </Grid>
 

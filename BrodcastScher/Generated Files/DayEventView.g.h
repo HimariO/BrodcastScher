@@ -15,7 +15,6 @@ namespace Windows {
                 ref class ListView;
                 ref class TextBlock;
                 ref class CheckBox;
-                ref class TimePicker;
                 ref class TextBox;
                 ref class Button;
             }
@@ -37,22 +36,25 @@ namespace BrodcastScher
     
     private:
         bool _contentLoaded;
-        class DayEventView_obj23_Bindings;
+        class DayEventView_obj26_Bindings;
     
         ::XamlBindingInfo::XamlBindings^ Bindings;
         private: ::Windows::UI::Xaml::Controls::ListView^ OutputDevicesList;
         private: ::Windows::UI::Xaml::Controls::TextBlock^ textbox_FilePath;
         private: ::Windows::UI::Xaml::Controls::ListView^ InputDevicesList;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ contentTag_PGM;
+        private: ::Windows::UI::Xaml::Controls::CheckBox^ contentTag_AD;
         private: ::Windows::UI::Xaml::Controls::CheckBox^ check_FileInput;
         private: ::Windows::UI::Xaml::Controls::CheckBox^ check_Deviceinput;
         private: ::Windows::UI::Xaml::Controls::CheckBox^ check_PlayListInput;
         private: ::Windows::UI::Xaml::Controls::CheckBox^ check_EveryDay;
         private: ::Windows::UI::Xaml::Controls::CheckBox^ check_EveryWeek;
-        private: ::Windows::UI::Xaml::Controls::CheckBox^ check_EveryMonth;
-        private: ::Windows::UI::Xaml::Controls::TimePicker^ endTimePicker;
-        private: ::Windows::UI::Xaml::Controls::TextBox^ endTimeSec;
-        private: ::Windows::UI::Xaml::Controls::TimePicker^ startTimePicker;
-        private: ::Windows::UI::Xaml::Controls::TextBox^ startTimeSec;
+        private: ::Windows::UI::Xaml::Controls::TextBox^ endTimeH;
+        private: ::Windows::UI::Xaml::Controls::TextBox^ endTimeM;
+        private: ::Windows::UI::Xaml::Controls::TextBox^ endTimeS;
+        private: ::Windows::UI::Xaml::Controls::TextBox^ startTimeH;
+        private: ::Windows::UI::Xaml::Controls::TextBox^ startTimeM;
+        private: ::Windows::UI::Xaml::Controls::TextBox^ startTimeS;
         private: ::Windows::UI::Xaml::Controls::TextBox^ textbox_eventName;
         private: ::Windows::UI::Xaml::Controls::ListView^ theList;
         private: ::Windows::UI::Xaml::Controls::Button^ btn_AddEvent;

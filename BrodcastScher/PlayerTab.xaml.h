@@ -40,5 +40,8 @@ namespace BrodcastScher
 
 		void InitEventQueue();
 		concurrency::task<void> CreateUpdateTask();
+		void eqToggle_Toggled(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+		void eq1Slider_ValueChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventArgs^ e);
+		void limiterToggle_Toggled(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 	};
 }

@@ -7,6 +7,7 @@ using json = nlohmann::json;
 namespace BrodcastScher
 {
 	enum InputType { InputDevice, PlayList, AudioFile };
+	enum ContentTag{ PGM, AD};
 	class DayEventDetail;
 
 	public ref class DayEvent  sealed {
@@ -50,11 +51,13 @@ namespace BrodcastScher
 	class DayEventDetail {
 	private:
 		static  unsigned int counter_color;
-		static  std::string color_opts[6];
+		static  std::string color_opts[8];
 	public:
 		DayEventDetail();
 		DayEventDetail(json JSON);
 		json toJSON();
+		void setStartTime(int h, int m, int s);
+		void setEndTime(int h, int m, int s);
 
 		DayEvent^ UIobject;
 		DayEventDetail* Next ;
@@ -69,6 +72,7 @@ namespace BrodcastScher
 		int repeat_type = 0;
 
 		InputType type;
+		ContentTag content_tag;
 		unsigned int input_dev_index = 0;
 		unsigned int output_dev_index = 0;
 

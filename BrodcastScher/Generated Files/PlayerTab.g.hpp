@@ -183,97 +183,101 @@ void ::BrodcastScher::PlayerTab::Connect(int __connectionId, ::Platform::Object^
             break;
         case 15:
             {
-                this->eqToggle = safe_cast<::Windows::UI::Xaml::Controls::ToggleSwitch^>(__target);
+                this->eq1SliderContainer = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
             }
             break;
         case 16:
             {
-                this->eq1SliderContainer = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
+                this->eq2SliderContainer = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
             }
             break;
         case 17:
             {
-                this->eq2SliderContainer = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
+                this->eq3SliderContainer = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
             }
             break;
         case 18:
             {
-                this->eq3SliderContainer = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
+                this->eq4SliderContainer = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
             }
             break;
         case 19:
             {
-                this->eq4SliderContainer = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
+                this->eq5SliderContainer = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
             }
             break;
         case 20:
             {
-                this->eq5SliderContainer = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
+                this->eq5Slider = safe_cast<::Windows::UI::Xaml::Controls::Slider^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Slider^>(this->eq5Slider))->ValueChanged += ref new ::Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventHandler(this, (void (::BrodcastScher::PlayerTab::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventArgs^))&PlayerTab::eq1Slider_ValueChanged);
             }
             break;
         case 21:
             {
-                this->eq6SliderContainer = safe_cast<::Windows::UI::Xaml::Controls::StackPanel^>(__target);
+                this->eq5SliderLabel = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 22:
             {
-                this->eq6Slider = safe_cast<::Windows::UI::Xaml::Controls::Slider^>(__target);
+                this->eq4Slider = safe_cast<::Windows::UI::Xaml::Controls::Slider^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Slider^>(this->eq4Slider))->ValueChanged += ref new ::Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventHandler(this, (void (::BrodcastScher::PlayerTab::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventArgs^))&PlayerTab::eq1Slider_ValueChanged);
             }
             break;
         case 23:
             {
-                this->eq6SliderLabel = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->eq4SliderLabel = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 24:
             {
-                this->eq5Slider = safe_cast<::Windows::UI::Xaml::Controls::Slider^>(__target);
+                this->eq3Slider = safe_cast<::Windows::UI::Xaml::Controls::Slider^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Slider^>(this->eq3Slider))->ValueChanged += ref new ::Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventHandler(this, (void (::BrodcastScher::PlayerTab::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventArgs^))&PlayerTab::eq1Slider_ValueChanged);
             }
             break;
         case 25:
             {
-                this->eq5SliderLabel = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->eq3SliderLabel = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 26:
             {
-                this->eq4Slider = safe_cast<::Windows::UI::Xaml::Controls::Slider^>(__target);
+                this->eq2Slider = safe_cast<::Windows::UI::Xaml::Controls::Slider^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Slider^>(this->eq2Slider))->ValueChanged += ref new ::Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventHandler(this, (void (::BrodcastScher::PlayerTab::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventArgs^))&PlayerTab::eq1Slider_ValueChanged);
             }
             break;
         case 27:
             {
-                this->eq4SliderLabel = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->eq2SliderLabel = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 28:
             {
-                this->eq3Slider = safe_cast<::Windows::UI::Xaml::Controls::Slider^>(__target);
+                this->eq1Slider = safe_cast<::Windows::UI::Xaml::Controls::Slider^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::Slider^>(this->eq1Slider))->ValueChanged += ref new ::Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventHandler(this, (void (::BrodcastScher::PlayerTab::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventArgs^))&PlayerTab::eq1Slider_ValueChanged);
             }
             break;
         case 29:
             {
-                this->eq3SliderLabel = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->eq1SliderLabel = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
             }
             break;
         case 30:
             {
-                this->eq2Slider = safe_cast<::Windows::UI::Xaml::Controls::Slider^>(__target);
+                this->eqToggle = safe_cast<::Windows::UI::Xaml::Controls::ToggleSwitch^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::ToggleSwitch^>(this->eqToggle))->Toggled += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::BrodcastScher::PlayerTab::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&PlayerTab::eqToggle_Toggled);
             }
             break;
         case 31:
             {
-                this->eq2SliderLabel = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
-            }
-            break;
-        case 32:
-            {
-                this->eq1Slider = safe_cast<::Windows::UI::Xaml::Controls::Slider^>(__target);
-            }
-            break;
-        case 33:
-            {
-                this->eq1SliderLabel = safe_cast<::Windows::UI::Xaml::Controls::TextBlock^>(__target);
+                this->limiterToggle = safe_cast<::Windows::UI::Xaml::Controls::ToggleSwitch^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::ToggleSwitch^>(this->limiterToggle))->Toggled += ref new ::Windows::UI::Xaml::RoutedEventHandler(this, (void (::BrodcastScher::PlayerTab::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::RoutedEventArgs^))&PlayerTab::limiterToggle_Toggled);
             }
             break;
     }

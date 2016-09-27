@@ -33,6 +33,7 @@ using namespace Windows::Globalization;
 DateTimeFormatter ^time_formater;
 Calendar^ calendar;
 std::vector<DayEventDetail> copyedDetail;
+std::map<std::string, Windows::UI::Xaml::Controls::CalendarViewDayItem^> dayItems;
 
 struct ColorEqual : public std::binary_function<const Color, const Color, bool>
 {
@@ -48,7 +49,64 @@ ScheduleTab::ScheduleTab()
 	InitializeComponent();
 	time_formater = ref new DateTimeFormatter("shortdate"); 
 	calendar = ref new  Windows::Globalization::Calendar();
-	
+
+	calendar->SetToNow();
+	calendar->Day = calendar->FirstDayInThisMonth;
+	Calendar->MinDate = calendar->GetDateTime();
+
+	calendar->SetToNow();
+	calendar->AddMonths(2);
+	calendar->Day = calendar->LastDayInThisMonth;
+	Calendar->MaxDate = calendar->GetDateTime();
+}
+
+void BrodcastScher::ScheduleTab::PassNavigate(Windows::UI::Xaml::Navigation::NavigationEventArgs ^ e)
+{
+	OnNavigatedTo(e);
+}
+
+
+void BrodcastScher::ScheduleTab::OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs ^ e)
+{
+	if (e->NavigationMode == NavigationMode::Back) {
+		
+		auto date = Calendar->SelectedDates->GetAt(0);
+		calendar->SetDateTime(date);
+
+		auto d = calendar->Day;
+		auto m = calendar->Month;
+		auto y = calendar->Year;
+		auto s_date = Tool::GetDateString(y, m, d);
+
+		if (dayItems.find(s_date) == dayItems.end())
+			return;
+
+		try {
+			int item_num = json_file["events"][s_date].size();
+
+			IVector<Color>^ colors = ref new Vector<Color, ColorEqual>();
+
+			for (size_t i = 1; i <= item_num; i++)
+			{
+				if (i <= 3) {
+					colors->Append(Windows::UI::Colors::Blue);
+				}
+				else if (i > 3 && i <= 6) {
+					colors->Append(Windows::UI::Colors::Green);
+				}
+				else if (i > 6 && i <= 9) {
+					colors->Append(Windows::UI::Colors::GreenYellow);
+				}
+				else if (i > 9) {
+					colors->Append(Windows::UI::Colors::Red);
+				}
+			}
+
+
+			dayItems[s_date]->SetDensityColors(colors);
+		}
+		catch (...) {}
+	}
 }
 
 
@@ -123,6 +181,8 @@ void BrodcastScher::ScheduleTab::Calendar_CalendarViewDayItemChanging(Windows::U
 		args->Item->Background = ref new SolidColorBrush(Windows::UI::Colors::LightBlue);
 	else
 		args->Item->Background = ref new SolidColorBrush(Windows::UI::Colors::White);
+
+	dayItems[s_time] = args->Item;
 }
 
 

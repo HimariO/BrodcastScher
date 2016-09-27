@@ -108,6 +108,7 @@ void BrodcastScher::MainPage::OnNavigatedTo(Windows::UI::Xaml::Navigation::Navig
 	
 	if (e->NavigationMode == NavigationMode::Back) {
 		WriteToFile(json_file.dump());
+		SchTab->PassNavigate(e);
 	}
 }
 

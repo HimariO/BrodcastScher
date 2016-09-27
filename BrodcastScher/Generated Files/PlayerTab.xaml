@@ -26,31 +26,31 @@
             <!--<ListBox x:Name="input_listbox" Grid.Column="0" Margin="5"></ListBox>
             <ListBox x:Name="output_listbox" Grid.Column="1" Margin="5"></ListBox>-->
             <StackPanel x:ConnectionId='5' x:Name="equalizerEffectContainer" Margin="20" Padding="5" BorderThickness="1,0" BorderBrush="#FF2CB2FF" Grid.Column="0">
-                <ToggleSwitch x:ConnectionId='15' x:Name="eqToggle" Header="EQUALIZER EFFECT" IsOn="False"  IsEnabled="False" />
                 <StackPanel Orientation="Horizontal">
-                    <StackPanel x:ConnectionId='16' x:Name="eq1SliderContainer" Orientation="Vertical">
-                        <Slider x:ConnectionId='32' x:Name="eq1Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="100" Minimum="0" SmallChange="5" Value="50" Height="500" IsEnabled="False" Margin="20,5"/>
-                        <TextBlock x:ConnectionId='33' x:Name="eq1SliderLabel" Text="100Hz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
+                    <ToggleSwitch x:ConnectionId='30' x:Name="eqToggle" Header="EQUALIZER EFFECT" IsOn="False"  IsEnabled="False"                           />
+                    <ToggleSwitch x:ConnectionId='31' x:Name="limiterToggle" Header="MAIN" IsOn="False"  IsEnabled="False"                                 Margin="170,0,0,0"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel x:ConnectionId='15' x:Name="eq1SliderContainer" Orientation="Vertical">
+                        <Slider x:ConnectionId='28' x:Name="eq1Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="100" Minimum="0" SmallChange="5" Value="50" Height="500" IsEnabled="False" Margin="20,5"                                      />
+                        <TextBlock x:ConnectionId='29' x:Name="eq1SliderLabel" Text="100Hz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
                     </StackPanel>
-                    <StackPanel x:ConnectionId='17' x:Name="eq2SliderContainer" Orientation="Vertical">
-                        <Slider x:ConnectionId='30' x:Name="eq2Slider" Orientation="Vertical" HorizontalAlignment="Center" Maximum="100" Minimum="0" SmallChange="5" Value="20" Height="500" IsEnabled="False" Margin="20,5"/>
-                        <TextBlock x:ConnectionId='31' x:Name="eq2SliderLabel" Text="900Hz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
+                    <StackPanel x:ConnectionId='16' x:Name="eq2SliderContainer" Orientation="Vertical">
+                        <Slider x:ConnectionId='26' x:Name="eq2Slider" Orientation="Vertical" HorizontalAlignment="Center" Maximum="100" Minimum="0" SmallChange="5" Value="20" Height="500" IsEnabled="False" Margin="20,5"                                      />
+                        <TextBlock x:ConnectionId='27' x:Name="eq2SliderLabel" Text="900Hz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
                     </StackPanel>
-                    <StackPanel x:ConnectionId='18' x:Name="eq3SliderContainer" Orientation="Vertical">
-                        <Slider x:ConnectionId='28' x:Name="eq3Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="100" Minimum="0" SmallChange="5" Value="70" Height="500" IsEnabled="False" Margin="20,5"/>
-                        <TextBlock x:ConnectionId='29' x:Name="eq3SliderLabel" Text="5kHz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
+                    <StackPanel x:ConnectionId='17' x:Name="eq3SliderContainer" Orientation="Vertical">
+                        <Slider x:ConnectionId='24' x:Name="eq3Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="100" Minimum="0" SmallChange="5" Value="70" Height="500" IsEnabled="False" Margin="20,5"                                      />
+                        <TextBlock x:ConnectionId='25' x:Name="eq3SliderLabel" Text="5kHz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
                     </StackPanel>
-                    <StackPanel x:ConnectionId='19' x:Name="eq4SliderContainer" Orientation="Vertical">
-                        <Slider x:ConnectionId='26' x:Name="eq4Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="100" Minimum="0" SmallChange="5" Value="30" Height="500" IsEnabled="False" Margin="20,5"/>
-                        <TextBlock x:ConnectionId='27' x:Name="eq4SliderLabel" Text="12kHz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
+                    <StackPanel x:ConnectionId='18' x:Name="eq4SliderContainer" Orientation="Vertical">
+                        <Slider x:ConnectionId='22' x:Name="eq4Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="100" Minimum="0" SmallChange="5" Value="30" Height="500" IsEnabled="False" Margin="20,5"                                      />
+                        <TextBlock x:ConnectionId='23' x:Name="eq4SliderLabel" Text="12kHz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
                     </StackPanel>
-                    <StackPanel x:ConnectionId='20' x:Name="eq5SliderContainer" Orientation="Vertical">
-                        <Slider x:ConnectionId='24' x:Name="eq5Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="100" Minimum="0" SmallChange="5" Value="30" Height="500" IsEnabled="False" Margin="20,5"/>
-                        <TextBlock x:ConnectionId='25' x:Name="eq5SliderLabel" Text="16kHz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
-                    </StackPanel>
-                    <StackPanel x:ConnectionId='21' x:Name="eq6SliderContainer" Orientation="Vertical">
-                        <Slider x:ConnectionId='22' x:Name="eq6Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="100" Minimum="0" SmallChange="5" Value="30" Height="500" IsEnabled="False" Margin="20,5"/>
-                        <TextBlock x:ConnectionId='23' x:Name="eq6SliderLabel" Text="22kHz" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
+                    <StackPanel x:ConnectionId='19' x:Name="eq5SliderContainer" Orientation="Vertical">
+                        <Slider x:ConnectionId='20' x:Name="eq5Slider" Orientation="Vertical" HorizontalAlignment="Center"  Maximum="1800" Minimum="1" SmallChange="5" Value="100" Height="500" IsEnabled="False" Margin="20,5" Foreground="#FF00D79C"                                      />
+                        <TextBlock x:ConnectionId='21' x:Name="eq5SliderLabel" Text="ALL" HorizontalAlignment="Center" Foreground="#4A4A4A"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>

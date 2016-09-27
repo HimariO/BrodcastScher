@@ -79,6 +79,8 @@ void BrodcastScher::PlayerTab::btn_start_Click(Platform::Object^ sender, Windows
 	}
 	auto btn = (Button^)sender;
 	btn->IsEnabled = false;
+	eqToggle->IsEnabled = true;
+	limiterToggle->IsEnabled = true;
 }
 
 
@@ -303,4 +305,85 @@ void BrodcastScher::PlayerTab::btn_stop_Click(Platform::Object^ sender, Windows:
 	}
 
 	btn_start->IsEnabled = true;
+
+	eqToggle->IsOn = false;
+	eqToggle->IsEnabled = false;
+
+	limiterToggle->IsEnabled = false;
+	limiterToggle->IsOn = false;
+}
+
+
+void BrodcastScher::PlayerTab::eqToggle_Toggled(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	if (eqToggle->IsOn) {
+		eq1Slider->IsEnabled = true;
+		eq2Slider->IsEnabled = true;
+		eq3Slider->IsEnabled = true;
+		eq4Slider->IsEnabled = true;
+
+		for (auto rely : onGoingRely)
+			rely->EnableEffects(2);
+	}
+	else {
+		eq1Slider->IsEnabled = false;
+		eq2Slider->IsEnabled = false;
+		eq3Slider->IsEnabled = false;
+		eq4Slider->IsEnabled = false;
+
+		for (auto rely : onGoingRely)
+			rely->DisableEffects(2);
+	}
+}
+
+
+void BrodcastScher::PlayerTab::eq1Slider_ValueChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::Primitives::RangeBaseValueChangedEventArgs^ e)
+{  // Handle all slider value over here.
+	Slider^ _sender = (Slider^)sender;
+	auto name = _sender->Name;
+	auto index = 0;
+
+	double value = _sender->Value;
+	const double fxeq_min_gain = 0.126;
+	const double fxeq_max_gain = 7.94;
+
+	double scale = (fxeq_max_gain - fxeq_min_gain) / 100;
+	value = (fxeq_min_gain + ((value)* scale));
+
+	if (name == "eq1Slider") {
+		index = 0;
+	}
+	else if (name == "eq2Slider") {
+		index = 1;
+	}
+	else if (name == "eq3Slider") {
+		index = 2;
+	}
+	else if (name == "eq4Slider") {
+		index = 3;
+	}
+	else if (name == "eq5Slider") {
+		index = 4;
+		value = _sender->Value;
+	}
+
+	for (auto rely : onGoingRely)
+		rely->SetEffectValue(index, value);
+}
+
+
+void BrodcastScher::PlayerTab::limiterToggle_Toggled(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+	if (limiterToggle->IsOn) {
+		eq5Slider->IsEnabled = true;
+
+		for (auto rely : onGoingRely)
+			rely->EnableEffects(1);
+	}
+	else {
+		eq5Slider->IsEnabled = false;
+
+		for (auto rely : onGoingRely)
+			rely->DisableEffects(1);
+	}
 }
