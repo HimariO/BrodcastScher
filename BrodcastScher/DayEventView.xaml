@@ -85,6 +85,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Event Name" Grid.Row="0" Margin="0, 5"></TextBlock>
+                    <TextBlock x:Name="textbox_Date" Text="" Grid.Row="0" Margin="0, 5" HorizontalAlignment="Right" Foreground="#FF1C98FF"></TextBlock>
                     <TextBox x:Name="textbox_eventName" Grid.Row="1" Margin="0, 5" TextChanged="textbox_eventName_TextChanged"></TextBox>
                 </Grid>
 

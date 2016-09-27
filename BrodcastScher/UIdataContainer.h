@@ -43,7 +43,12 @@ namespace BrodcastScher
 			double get() {
 				return this->itemHeight;
 			};
-			void set(double s) { this->itemHeight = s; };
+			void set(double s) {
+				if(s>10)
+					this->itemHeight = s; 
+				else
+					this->itemHeight = 10;
+			};
 		};
 	};
 
@@ -58,6 +63,7 @@ namespace BrodcastScher
 		json toJSON();
 		void setStartTime(int h, int m, int s);
 		void setEndTime(int h, int m, int s);
+		void refreshColor();
 
 		DayEvent^ UIobject;
 		DayEventDetail* Next ;

@@ -171,7 +171,16 @@ void BrodcastScher::DayEventView::startTimeSec_TextChanged(Platform::Object^ sen
 
 		EventSelected->start->wHour = value;
 	}
+
 	EventSelected->setStartTime(EventSelected->start->wHour, EventSelected->start->wMinute, EventSelected->start->wSecond);
+	auto s = EventSelected->start->wHour+ EventSelected->start->wMinute+ EventSelected->start->wSecond;
+	auto E = EventSelected->end->wHour + EventSelected->end->wMinute + EventSelected->end->wSecond;
+
+	if (E < s) {
+		endTimeH->Text = startTimeH->Text;
+		endTimeM->Text = startTimeM->Text;
+		endTimeS->Text = startTimeS->Text;
+	}
 }
 
 
@@ -218,6 +227,7 @@ void BrodcastScher::DayEventView::OnNavigatedTo(Windows::UI::Xaml::Navigation::N
 	_calendar->SetDateTime(para);
 	auto s_time = Tool::GetDateString(_calendar->Year, _calendar->Month, _calendar->Day);
 	DateString = s_time;
+	textbox_Date->Text = _calendar->Year + " / " + _calendar->Month + " / " + _calendar->Day;
 
 	try {
 		this_day_events = json_file["events"][s_time];
@@ -279,6 +289,7 @@ void BrodcastScher::DayEventView::UpdateUIEventList()
 
 	for (auto data : EventList) {
 		int current = data.start->wHour * 60 + data.start->wMinute;
+		data.refreshColor();
 
 		if (pre_end_time >= current) // section will overlap
 			data.UIobject->itemH -= pre_end_time - current;
@@ -442,6 +453,12 @@ void BrodcastScher::DayEventView::check_EveryDay_Checked(Platform::Object^ sende
 void BrodcastScher::DayEventView::btn_AddEvent_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	EventList.push_back(DayEventDetail());
+	
+	if (EventSelected != nullptr) {
+		EventList[EventList.size() - 1].setEndTime(_wtoi(endTimeH->Text->Data()), _wtoi(endTimeM->Text->Data()), _wtoi(endTimeS->Text->Data()));
+		EventList[EventList.size() - 1].setStartTime(_wtoi(startTimeH->Text->Data()), _wtoi(startTimeM->Text->Data()), _wtoi(startTimeS->Text->Data()));
+	}
+
 	EventSelected = &EventList[EventList.size() - 1];
 	UpdateDetailView();
 }

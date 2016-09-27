@@ -36,7 +36,7 @@ namespace BrodcastScher
     
     private:
         bool _contentLoaded;
-        class DayEventView_obj26_Bindings;
+        class DayEventView_obj27_Bindings;
     
         ::XamlBindingInfo::XamlBindings^ Bindings;
         private: ::Windows::UI::Xaml::Controls::ListView^ OutputDevicesList;
@@ -55,6 +55,7 @@ namespace BrodcastScher
         private: ::Windows::UI::Xaml::Controls::TextBox^ startTimeH;
         private: ::Windows::UI::Xaml::Controls::TextBox^ startTimeM;
         private: ::Windows::UI::Xaml::Controls::TextBox^ startTimeS;
+        private: ::Windows::UI::Xaml::Controls::TextBlock^ textbox_Date;
         private: ::Windows::UI::Xaml::Controls::TextBox^ textbox_eventName;
         private: ::Windows::UI::Xaml::Controls::ListView^ theList;
         private: ::Windows::UI::Xaml::Controls::Button^ btn_AddEvent;

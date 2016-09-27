@@ -35,7 +35,7 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <ListView x:ConnectionId='24' x:Name="theList"  BorderThickness="0,0,2,0" Width="972" Foreground="{x:Null}" Background="#FFE6E6E6" Grid.Row="0"
+            <ListView x:ConnectionId='25' x:Name="theList"  BorderThickness="0,0,2,0" Width="972" Foreground="{x:Null}" Background="#FFE6E6E6" Grid.Row="0"
                       IsItemClickEnabled="True"                               SelectionMode="Extended">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
@@ -45,7 +45,7 @@
 
                 <ListView.ItemTemplate>
                     <DataTemplate                            >
-                        <Grid x:ConnectionId='26'                          Padding="0" Margin="0"                                                           >
+                        <Grid x:ConnectionId='27'                          Padding="0" Margin="0"                                                           >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
@@ -53,17 +53,17 @@
                             <!--<Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="10" Height="10">
                                 <Image Source="Assets/arrow.png" Stretch="UniformToFill" PointerPressed="Image_PointerPressed"/>
                             </Border>-->
-                            <TextBlock x:ConnectionId='27' Grid.Row="0"                    TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock x:ConnectionId='28' Grid.Row="0"                    TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                             <Grid x:Name="detailGrid" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.Row="1">
-                                <TextBlock x:ConnectionId='28'                      TextWrapping="Wrap"/>
+                                <TextBlock x:ConnectionId='29'                      TextWrapping="Wrap"/>
                             </Grid>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Button x:ConnectionId='25' x:Name="btn_AddEvent" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                            Background="#CC18AAD4">
+            <Button x:ConnectionId='26' x:Name="btn_AddEvent" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                            Background="#CC18AAD4">
                 <TextBlock Text="+" Foreground="White" FontSize="20"></TextBlock>
             </Button>
         </Grid>
@@ -85,7 +85,8 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Event Name" Grid.Row="0" Margin="0, 5"></TextBlock>
-                    <TextBox x:ConnectionId='23' x:Name="textbox_eventName" Grid.Row="1" Margin="0, 5"                                            ></TextBox>
+                    <TextBlock x:ConnectionId='23' x:Name="textbox_Date" Text="" Grid.Row="0" Margin="0, 5" HorizontalAlignment="Right" Foreground="#FF1C98FF"></TextBlock>
+                    <TextBox x:ConnectionId='24' x:Name="textbox_eventName" Grid.Row="1" Margin="0, 5"                                            ></TextBox>
                 </Grid>
 
 

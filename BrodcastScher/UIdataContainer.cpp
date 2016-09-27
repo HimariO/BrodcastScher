@@ -32,14 +32,13 @@ std::string BrodcastScher::DayEventDetail::color_opts[8]{
 
 BrodcastScher::DayEventDetail::DayEventDetail()
 {
-	event_name;
-	description;
 	type = InputType::InputDevice;
 	start = new _SYSTEMTIME();
 	end = new _SYSTEMTIME();
 	GetLocalTime(start);
 	GetLocalTime(end);
-	UIobject = ref new DayEvent("", "", 0, Tool::sToS(color_opts[counter_color++ % 6]));
+	event_name = "";
+	UIobject = ref new DayEvent(Tool::sToS(event_name), "", 0, Tool::sToS(color_opts[counter_color++ % 6]));
 	//UIobject->setParent ( this);
 }
 
@@ -159,5 +158,19 @@ void BrodcastScher::DayEventDetail::setEndTime(int h, int m, int s)
 	if (UIobject != nullptr) {
 		UIobject->itemH = height;
 		UIobject->Out = Tool::sToS(std::to_string(start->wHour) + ":" + std::to_string(start->wMinute) + " ~ " + std::to_string(end->wHour) + ":" + std::to_string(end->wMinute));
+	}
+}
+
+void BrodcastScher::DayEventDetail::refreshColor()
+{
+	
+	switch (type) {
+	case InputType::InputDevice:
+		UIobject->Color = Tool::sToS( color_opts[input_dev_index % 6]);
+		break;
+	case InputType::AudioFile:
+	case InputType::PlayList:
+		UIobject->Color = Tool::sToS(color_opts[content_tag + 6]);
+		break;
 	}
 }
